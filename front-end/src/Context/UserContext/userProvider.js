@@ -5,7 +5,7 @@
 // const userProvider = ({ children }) => {
 
 //   const context = {
-  
+
 //   };
 //   return (
 //     <FoodContext.Provider value={context}>
