@@ -1,18 +1,15 @@
-const { EmitFlags } = require("typescript");
-
 const connection = require('./connection');
 
 const createUser = async (name, email, password, seller) => {
   try {
-    const createdUser = await connection()
+    const role = seller ? 'administrator' : 'client';
+    await connection()
       .then((db) => db
         .getTable('users')
         .insert(['name', 'email', 'password', 'role'])
-        .values(name, email, password, seller ? 'administrator' : 'client')
-        .execute(),
-        )
-      .then((user) => user);
-    return createdUser;
+        .values(name, email, password, role)
+        .execute());
+    return { name, email, password, role };
   } catch (err) {
     return err;
   }

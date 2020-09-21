@@ -4,15 +4,13 @@ const ValidadeUser = async (name, email, password) => {
   const validEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
   const validName = /^[a-z ,.'-]+$/i.test(name);
   const validPass = /^[\d]{6}$/.test(password);
-  switch(true){
-    case (!name || !email || !password):
-      return { status: 422, message: 'Dados incompletos!' };
+  switch (true) {
     case (!validName || name.length < 12):
       return { status: 422, message: 'Nome inválido!' };
     case (!validEmail):
       return { status: 422, message: 'Email inválido!' };
     case (!validPass):
-      return { status: 422, message: 'Senha em padrão inválido!' };
+      return { status: 422, message: 'Senha inválida!' };
     default:
       return { status: 200, message: '' };
   }
@@ -28,6 +26,6 @@ const RegisterUser = async (userData) => {
   return { status, message };
 };
 
-module.exports = { 
+module.exports = {
   RegisterUser,
 };
