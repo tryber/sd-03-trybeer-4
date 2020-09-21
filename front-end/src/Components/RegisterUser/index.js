@@ -28,27 +28,38 @@ const RegisterUser = () => {
       <form action="/register" method="POST">
         <label htmlFor="userName">
           Nome
-          <input onChange={ (e) => handleName(e) } type="text" name="name" id="userName" />
+          <input 
+            onChange={ (e) => handleName(e) }
+            type="text" name="name" id="userName" data-testid="signup-name"
+            />
         </label>
         <br />
         <label htmlFor="userEmail">
           Email
-          <input onChange={ (e) => handleEmail(e) } type="email" name="email" id="userEmail" />
+          <input
+            onChange={ (e) => handleEmail(e) }
+            type="email" name="email" id="userEmail" data-testid="signup-email"
+          />
         </label>
         <br />
         <label htmlFor="userPassword">
           Senha
-          <input onChange={ (e) => handlePassword(e) } type="password" name="password" id="userPassword" minLength="6" />
+          <input
+            onChange={ (e) => handlePassword(e) }
+            type="password" name="password" id="userPassword"
+            minLength="6" data-testid="signup-password"
+          />
         </label>
         <br />
         <label htmlFor="userSeller">
           Quero vender
-          <input type="checkbox" name="seller" id="userSeller" />
+          <input type="checkbox" name="seller" id="userSeller" data-testid="signup-seller"/>
         </label>
         <br />
         <button
           disabled={ email === '' || password === '' || name === '' }
           type="submit"
+          data-testid="signup-btn"
         >
           Cadastrar
         </button>
