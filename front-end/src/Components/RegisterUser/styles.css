@@ -1,0 +1,6 @@
+.register-contrainer {
+  display: flex;
+  margin: auto;
+  max-width: 600px;
+  width: 30%;
+}
