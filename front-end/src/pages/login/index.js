@@ -12,7 +12,7 @@ function LoginPage() {
     /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)
   );
 
-  const getUserInfo = () => {
+  const getToken = () => {
     const { role, token } = getUserFromAPI(email, password);
     localStorage.setItem('token', JSON.stringify(token));
 
@@ -44,7 +44,7 @@ function LoginPage() {
         type="button"
         disabled={!isValidFields()}
         data-testid="signin-btn"
-        onClick={() => getUserInfo(email, password)}
+        onClick={() => getToken(email, password)}
       >
         Entrar
       </button>
