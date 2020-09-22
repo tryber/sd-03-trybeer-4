@@ -1,4 +1,5 @@
 const mysqlx = require('@mysql/xdevapi');
+require('dotenv/config');
 
 let schema;
 module.exports = () => (
@@ -17,6 +18,6 @@ module.exports = () => (
         return schema;
       })
       .catch((error) => {
-        console.error(error);
+        console.error('EU SOU O ERRO', error);
         process.exit(1);
       }));
