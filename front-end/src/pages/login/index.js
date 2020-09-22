@@ -12,14 +12,12 @@ function LoginPage() {
     /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)
   );
 
-  const addToStorage = (userToken) => {
-    localStorage.setItem('token', JSON.stringify(userToken));
-  };
-
   const getUserInfo = () => {
-    const userRole = await getUserFromAPI(email, password);
-    if (userRole === 'administrator') (<Redirect to="/admin/profile" />)
-    if (userRole === 'client') (<Redirect to="/client/products" />)
+    const { role, token } = getUserFromAPI(email, password);
+    localStorage.setItem('token', JSON.stringify(token));
+
+    if (role === 'administrator') { <Redirect to="/admin/profile" /> }
+    if (role === 'client') { <Redirect to="/client/products" /> }
   }
 
   return (
