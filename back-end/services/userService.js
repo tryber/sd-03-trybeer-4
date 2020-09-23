@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { createUser } = require('../models/userModel');
 const { getUserByEmail } = require('../models/userModel');
 
-// const { JWT_SECRET } = process.env;
+const { JWT_SECRET } = process.env;
 const jwtConfig = {
   expiresIn: '7d',
   algorithm: 'HS256',
@@ -40,7 +40,7 @@ const LoginUser = async (userEmail, userPass) => {
   if (user.email !== userEmail) return { status: 404, message: 'Não há cadastro com esse email.' };
   if (user.password !== userPass) return { status: 400, message: 'Senha incorreta.' };
   const { password, id, ...userData } = user;
-  const token = jwt.sign(userData, 'JWT_SECRET', jwtConfig);
+  const token = jwt.sign(userData, JWT_SECRET, jwtConfig);
   return { ...userData, token };
 };
 
