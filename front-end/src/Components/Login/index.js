@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import validateInput from '../../utils/validate';
 import getUserFromAPI from '../../services/api_endpoints';
 import './login.css';
 
 function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [form, setForm] = useState({ email: '', password: '' });
+  const { email, password } = form;
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    return validateInput(name, value)
+      ? setForm({ ...form, [name]: value })
+      : setForm({ ...form, [name]: '' });
+  };
 
   const getUserData = async () => {
     const { data } = await getUserFromAPI(email, password);
@@ -23,18 +31,18 @@ function LoginPage() {
           className="text-box"
           name="email"
           data-testid="email-input"
-          onChange={ (event) => setEmail(event.target.value) }
+          onChange={ (event) => handleInput(event) }
           type="email"
           required
         />
       </label>
       <label htmlFor="password">
-        Senha
+        Password
         <input
           id="password"
           className="text-box"
           data-testid="password-input"
-          onChange={ (event) => setPassword(event.target.value) }
+          onChange={ (event) => handleInput(event) }
           name="password"
           required
           type="password"
@@ -42,11 +50,12 @@ function LoginPage() {
       </label>
       <button
         className="login-btn"
+        disabled={ email === '' || password === '' }
         type="button"
         data-testid="signin-btn"
         onClick={ () => getUserData(email, password) }
       >
-        Entrar
+        ENTRAR
       </button>
       <Link to="./register">
         <button
