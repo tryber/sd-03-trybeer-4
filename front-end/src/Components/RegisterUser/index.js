@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MenuBar from '../MenuBar/index';
+import validateInput from '../../utils/validate';
 import './styles.css';
 
 const beers = require('../../images/beers.png');
@@ -9,21 +10,10 @@ const RegisterUser = () => {
   const { email, password, name } = form;
 
   const handleInput = (e) => {
-    const nameLength = 12;
-    const passwordLength = 6;
-    const regExrEmail = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
     const { name: userName, value } = e.target;
-    let input = '';
-    if (userName === 'name') {
-      input = value.length >= nameLength ? value : '';
-    }
-    if (userName === 'email') {
-      input = regExrEmail.test(value) ? value : '';
-    }
-    if (userName === 'password') {
-      input = value.length >= passwordLength ? value : '';
-    }
-    return setForm({ ...form, [userName]: input });
+    return validateInput(userName, value)
+      ? setForm({ ...form, [userName]: value })
+      : setForm({ ...form, [userName]: '' });
   };
 
   return (
