@@ -17,7 +17,7 @@ app.get('/', (_req, res) => {
 });
 
 // Rota Get Testando Middleware de Validação do Token JWT
-app.get('/auth', authMiddleware);
+// app.get('/auth', authMiddleware);
 
 app.post('/login', (req, res) => loginController(req, res));
 
