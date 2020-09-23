@@ -9,10 +9,11 @@
     "axios": "^0.19.2",
     "jquery": "^1.9.1",
     "prop-types": "^15.7.2",
+    "jsonwebtoken": "^8.5.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "^3.4.1"
   },
   "devDependencies": {
     "eslint": "^6.1.0",
