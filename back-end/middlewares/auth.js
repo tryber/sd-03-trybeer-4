@@ -21,11 +21,8 @@ const authMiddleware = async (req, res, next) => {
     req.user = dataUser;
 
     return next();
-
   } catch (err) {
-
     return res.status(401).json({ error: 'Token inválido.' });
-
   }
 };
 
