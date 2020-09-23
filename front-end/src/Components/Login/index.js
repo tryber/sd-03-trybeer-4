@@ -19,12 +19,10 @@ function LoginPage() {
   const getUserData = async () => {
     const { data } = await getUserFromAPI(email, password);
     const { role, token } = data;
-    console.log('O QUE VEM ? POST REQUEST LOGIN', data, role, token);
-    if (token) { 
-      localStorage.setItem('user', JSON.stringify(data)); 
+    if (token) {
+      localStorage.setItem('user', JSON.stringify(data));
       setUserRole(role);
     }
-
     return true;
   };
 
