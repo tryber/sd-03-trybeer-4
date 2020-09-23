@@ -7,13 +7,12 @@ const getUserByEmail = async (userEmail) => (
       .select(['id', 'name', 'email', 'password', 'role'])
       .where('email = :email')
       .bind('email', userEmail)
-      .execute(),
-  )
-  .then((results) => results.fetchOne())
-  .then(([id, name, email, password, role]) => ({
-    id, name, email, password, role,
-  }))
-  .catch((err) => err)
+      .execute())
+    .then((results) => results.fetchOne())
+    .then(([id, name, email, password, role]) => ({
+      id, name, email, password, role,
+    }))
+    .catch((err) => err)
 );
 
 const getUserById = async (userId) => (
@@ -23,13 +22,12 @@ const getUserById = async (userId) => (
       .select(['id', 'name', 'email', 'password', 'role'])
       .where('email = :email')
       .bind('id', userId)
-      .execute(),
-  )
-  .then((results) => results.fetchOne())
-  .then(([id, name, email, password, role]) => ({
-    id, name, email, password, role,
-  }))
-  .catch((err) => err)
+      .execute())
+    .then((results) => results.fetchOne())
+    .then(([id, name, email, password, role]) => ({
+      id, name, email, password, role,
+    }))
+    .catch((err) => err)
 );
 
 const createUser = async (name, email, password, seller) => {

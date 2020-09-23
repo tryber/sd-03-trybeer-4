@@ -14,7 +14,6 @@ const registerController = async (req, res) => {
   return res.status(status).json({ message });
 };
 
-
 module.exports = {
   loginController,
   registerController,

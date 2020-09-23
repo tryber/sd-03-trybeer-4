@@ -1,6 +1,6 @@
-const { createUser } = require('../models/userModel');
-const { getUserByEmail }  = require('../models/userModel');
 const jwt = require('jsonwebtoken');
+const { createUser } = require('../models/userModel');
+const { getUserByEmail } = require('../models/userModel');
 
 // const { JWT_SECRET } = process.env;
 const jwtConfig = {
@@ -34,14 +34,13 @@ const RegisterUser = async (userData) => {
   return { status, message };
 };
 
-
 const LoginUser = async (userEmail, userPass) => {
-  if (userPass === '' || userEmail === '') return { status: 401, message: 'Preencha todos os campos.' }
+  if (userPass === '' || userEmail === '') return { status: 401, message: 'Preencha todos os campos.' };
   const user = await getUserByEmail(userEmail);
-  if (user.email !== userEmail) return { status: 404, message: 'Não há cadastro com esse email.' }
-  if (user.password !== userPass) return { status: 400, message: 'Senha incorreta.' }
+  if (user.email !== userEmail) return { status: 404, message: 'Não há cadastro com esse email.' };
+  if (user.password !== userPass) return { status: 400, message: 'Senha incorreta.' };
   const { password, id, ...userData } = user;
-  const token = jwt.sign(userData, 'JWT_SECRET', jwtConfig)
+  const token = jwt.sign(userData, 'JWT_SECRET', jwtConfig);
   return { ...userData, token };
 };
 
