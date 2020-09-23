@@ -1,8 +1,8 @@
 export default (name, value) => {
   const nameLength = 12;
-  const nameType = /[a-zA-Z\u00C0-\u00FF ]+/i;
+  const nameType = /^[a-z ]+$/i;
   const passwordLength = 6;
-  const regExrEmail = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
+  const regExrEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
   switch (true) {
     case name === 'name':
       return value.length >= nameLength && nameType.test(value);

@@ -8,7 +8,7 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
-const ValidadeUser = async (name, email, password) => {
+const ValidadeUser = async (name, email, password, dbEmail) => {
   const validEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
   const validName = /^[a-z ,.'-]+$/i.test(name);
   const validPass = /^[\d]{6}$/.test(password);
@@ -19,6 +19,8 @@ const ValidadeUser = async (name, email, password) => {
       return { status: 422, message: 'Email inválido!' };
     case (!validPass):
       return { status: 422, message: 'Senha inválida!' };
+    case (dbEmail && dbEmail === email):
+      return { status: 422, message: 'E-mail already in database.' };
     default:
       return { status: 200, message: '' };
   }
@@ -26,7 +28,8 @@ const ValidadeUser = async (name, email, password) => {
 
 const RegisterUser = async (userData) => {
   const { name, email, password, seller } = userData;
-  const { status, message } = await ValidadeUser(name, email, password);
+  const { email: duplicateEmail } = await getUserByEmail(email);
+  const { status, message } = await ValidadeUser(name, email, password, duplicateEmail);
   if (status === 200) {
     const user = await createUser(name, email, password, seller);
     return { status: 201, message: 'Usuário criado com sucesso!', user };
