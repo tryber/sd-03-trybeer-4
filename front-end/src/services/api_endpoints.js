@@ -1,9 +1,9 @@
 const axios = require('axios').default;
 
-const getUserFromAPI = async (email, password) => {
+export const getUserFromAPI = async (email, password) => {
   const response = await axios.post('http://localhost:3001/login', { email, password })
-  .then(response => response.json())
-  .catch((error) => console.log(error))
+    .then((resp) => resp.json())
+    .catch((error) => console.log(error));
   return response;
 };
 
@@ -15,5 +15,3 @@ const getUserFromAPI = async (email, password) => {
 //     : Promise.reject());
 //   return response;
 // };
-
-export { getUserFromAPI };
