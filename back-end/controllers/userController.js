@@ -1,5 +1,12 @@
 // services
 const { RegisterUser } = require('../services/userService');
+const { LoginUser } = require('../services/userService');
+
+const loginController = async (req, res) => {
+  const { email, password } = req.body;
+  const response = await LoginUser(email, password);
+  return res.status(200).json(response);
+};
 
 const registerController = async (req, res) => {
   const { status, message, user } = await RegisterUser(req.body);
@@ -8,5 +15,6 @@ const registerController = async (req, res) => {
 };
 
 module.exports = {
+  loginController,
   registerController,
 };

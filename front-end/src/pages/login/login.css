@@ -1,0 +1,16 @@
+.form {
+  border-radius: 50%;
+  display: inline-grid;
+  font-size: 1em;
+}
+
+.text-box {
+  align-items: center;
+  border: 1px solid black;
+  display: inline-block;
+}
+
+.login-btn {
+  background-color: #1CD118;
+  font-size: 1em;
+}

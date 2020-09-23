@@ -1,5 +1,35 @@
 const connection = require('./connection');
 
+const getUserByEmail = async (userEmail) => (
+  connection()
+    .then((schema) => schema
+      .getTable('users')
+      .select(['id', 'name', 'email', 'password', 'role'])
+      .where('email = :email')
+      .bind('email', userEmail)
+      .execute())
+    .then((results) => results.fetchOne())
+    .then(([id, name, email, password, role]) => ({
+      id, name, email, password, role,
+    }))
+    .catch((err) => err)
+);
+
+const getUserById = async (userId) => (
+  connection()
+    .then((schema) => schema
+      .getTable('users')
+      .select(['id', 'name', 'email', 'password', 'role'])
+      .where('email = :email')
+      .bind('id', userId)
+      .execute())
+    .then((results) => results.fetchOne())
+    .then(([id, name, email, password, role]) => ({
+      id, name, email, password, role,
+    }))
+    .catch((err) => err)
+);
+
 const createUser = async (name, email, password, seller) => {
   try {
     const role = seller ? 'administrator' : 'client';
@@ -16,6 +46,8 @@ const createUser = async (name, email, password, seller) => {
 };
 
 module.exports = {
+  getUserByEmail,
+  getUserById,
   createUser,
 };
 // const findByEmail = async (uEmail) => {
