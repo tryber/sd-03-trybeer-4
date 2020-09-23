@@ -29,7 +29,7 @@ function LoginPage() {
         />
       </label>
       <label htmlFor="password">
-        Senha
+        Password
         <input
           id="password"
           className="text-box"
@@ -46,7 +46,7 @@ function LoginPage() {
         data-testid="signin-btn"
         onClick={ () => getUserData(email, password) }
       >
-        Entrar
+        ENTRAR
       </button>
       <Link to="./register">
         <button
