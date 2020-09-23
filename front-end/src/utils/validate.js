@@ -1,6 +1,6 @@
 export default (name, value) => {
   const nameLength = 12;
-  const nameType = /^[a-zA-Z]*$/;
+  const nameType = /[a-zA-Z\u00C0-\u00FF ]+/i;
   const passwordLength = 6;
   const regExrEmail = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
   switch (true) {
