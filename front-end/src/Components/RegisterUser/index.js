@@ -45,7 +45,7 @@ const RegisterUser = () => {
           </label>
           <br />
           <label htmlFor="userPassword">
-            Senha
+            Password
             <input
               onChange={ (e) => handleInput(e) }
               type="password"
@@ -57,7 +57,7 @@ const RegisterUser = () => {
           </label>
           <br />
           <label htmlFor="userSeller">
-            Quero vender
+            Quero Vender
             <input type="checkbox" name="seller" id="userSeller" data-testid="signup-seller" />
           </label>
           <br />
