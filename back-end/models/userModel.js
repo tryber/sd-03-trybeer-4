@@ -45,10 +45,22 @@ const createUser = async (name, email, password, seller) => {
   }
 };
 
+const updateName = async (userName, userEmail) => (
+  connection()
+    .then((schema) => schema
+      .getTable('users')
+      .update()
+      .set('name', userName)
+      .where('email = :email')
+      .bind('email', userEmail)
+      .execute())
+);
+
 module.exports = {
   getUserByEmail,
   getUserById,
   createUser,
+  updateName,
 };
 // const findByEmail = async (uEmail) => {
 //   try {
