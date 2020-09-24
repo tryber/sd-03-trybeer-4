@@ -11,7 +11,7 @@ const ClientProfile = () => {
 
   const handleChangeName = async () => {
     const { data } = await postUpdateName(newName, email);
-    if (data.token) { localStorage.setItem('user', JSON.stringify(data)); setError(data.message) };
+    if (data.token) { localStorage.setItem('user', JSON.stringify(data)); setError(data.message); }
     return setError(data.message);
   };
 
@@ -28,11 +28,11 @@ const ClientProfile = () => {
           data-testid="profile-name-input"
           type="email"
           required
-          onChange={ e => setNewName(e.target.value) & setError(null) }
+          onChange={ (e) => setNewName(e.target.value) && setError(null) }
           value={ newName }
         />
       </label>
-       <br />
+      <br />
       <label htmlFor="email">
         Email
         <input
