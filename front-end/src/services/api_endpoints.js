@@ -14,4 +14,14 @@ const getUserFromAPI = async (email, password) => {
   return response;
 };
 
-export default getUserFromAPI;
+const getProductsFromAPI = async () => {
+  const response = await axios({
+    baseURL: 'http://localhost:3001/products',
+    method: 'get',
+  })
+    .catch(({ err }) => err);
+
+  return response;
+};
+
+export default { getUserFromAPI, getProductsFromAPI };
