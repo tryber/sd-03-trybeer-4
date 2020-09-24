@@ -9,7 +9,7 @@ const authMiddleware = async (req, res, next) => {
   if (!token) return res.send(401);
 
   try {
-    const payload = jwt.verify(token, 'JWT_SECRET');
+    const payload = jwt.verify(token, JWT_SECRET);
 
     const user = await userModel.getUserByEmail(payload.email);
 
