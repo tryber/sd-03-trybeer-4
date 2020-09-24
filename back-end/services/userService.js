@@ -11,7 +11,7 @@ const jwtConfig = {
 const ValidadeUser = async (name, email, password, dbEmail) => {
   const validEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
   const validName = /^[a-z ,.'-]+$/i.test(name);
-  const validPass = /^[\d]{6}$/.test(password);
+  const validPass = /[\d]{6}$/.test(password);
   switch (true) {
     case (!validName || name.length < 12):
       return { status: 422, message: 'Nome inválido!' };

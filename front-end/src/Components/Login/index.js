@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import validateInput from '../../utils/validate';
-import getUserFromAPI from '../../services/api_endpoints';
+import { getUserFromAPI } from '../../services/api_endpoints';
 import './login.css';
 
 function LoginPage() {

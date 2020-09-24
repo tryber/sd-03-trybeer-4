@@ -1,27 +1,45 @@
 import React, { useState } from 'react';
 import MenuBar from '../MenuBar/index';
 import validateInput from '../../utils/validate';
+import { postNewUserAPI } from '../../services/api_endpoints';
+import { Redirect } from 'react-router-dom';
 import './styles.css';
 
 const beers = require('../../images/beers.png');
 
 const RegisterUser = () => {
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
-  const { email, password, name } = form;
+  const [form, setForm] = useState({ name: '', email: '', password: '', seller: false });
+  const [error, setError] = useState({});
+  const [userCreated, setRedirect] = useState({ redirect: false, role: ''});
+  const { email, password, name, seller } = form;
+  const { redirect, role } = userCreated;
 
   const handleInput = (e) => {
+    if (e === 'seller') return setForm({ ...form, seller: !seller})
     const { name: userName, value } = e.target;
     return validateInput(userName, value)
       ? setForm({ ...form, [userName]: value })
       : setForm({ ...form, [userName]: '' });
   };
 
+  const createNewUser = async () => {
+    const { message, status, user } = await postNewUserAPI(name, email, password, seller);
+    if (status === 422) return setError({ message });
+    console.log(user.role);
+    if (user) return setRedirect({ redirect: true, role: user.role});
+  };
+  if (redirect) {
+    return (role === 'client'
+    ? <Redirect to="/products" />
+    : <Redirect to="/admin/orders" />)
+  }
   return (
     <>
       <MenuBar titleName="TryBeer" />
       <section className="register-container default-color shadow">
         <img src={ beers } alt="Icone de duas cervejas" width="100px" />
-        <form action="http://localhost:3001/register" method="POST">
+        {error.message && <p>{error.message}</p>}
+        <form>
           <label htmlFor="userName">
             Nome
             <input
@@ -58,13 +76,20 @@ const RegisterUser = () => {
           <br />
           <label htmlFor="userSeller">
             Quero Vender
-            <input type="checkbox" name="seller" id="userSeller" data-testid="signup-seller" />
+            <input
+              type="checkbox"
+              name="seller"
+              id="userSeller"
+              data-testid="signup-seller"
+              onChange={() => handleInput('seller')}
+            />
           </label>
           <br />
           <button
+            onClick={() => createNewUser()}
             className="confirm-btn"
             disabled={ email === '' || password === '' || name === '' }
-            type="submit"
+            type="button"
             data-testid="signup-btn"
           >
             Cadastrar
