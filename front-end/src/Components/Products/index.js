@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-import getProductsFromAPI from '../../services/api_endpoints';
+import React from 'react';
+// import { Link } from 'react-router-dom'; { useState }
+// import getProductsFromAPI from '../../services/api_endpoints';
 import MenuBar from '../MenuBar';
 
 function ProductsPage() {
