@@ -5,7 +5,7 @@ import MenuBar from '../MenuBar/index';
 import './styles.css';
 
 const ClientProfile = () => {
-  const { name, email } = JSON.parse(localStorage.getItem('user'));
+  const { name, email } = JSON.parse(localStorage.getItem('user')) || '';
   const [userEmail] = useState(email);
   const [newName, setNewName] = useState(name);
   const [message, setMessage] = useState(null);
@@ -18,10 +18,11 @@ const ClientProfile = () => {
 
   useEffect(() => { }, [setNewName]);
 
-  if (!name || !email) return <Redirect to="/login" />;
+  // if (!name) return <Redirect to="/login" />;
 
   return (
-    <div>
+    <div className="client-profile">
+      {console.log('name: ', name)}
       <MenuBar titleName="Meu perfil" />
       <label htmlFor="name">
         Nome
@@ -50,7 +51,6 @@ const ClientProfile = () => {
       </label>
       <br />
       <button
-        className="login-btn"
         type="button"
         data-testid="profile-save-btn"
         disabled={ name === newName }
