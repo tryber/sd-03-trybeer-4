@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { postUpdateName } from '../../services/api_endpoints';
+import { Redirect } from 'react-router-dom';
 import MenuBar from '../MenuBar/index';
 import './styles.css';
 
@@ -7,15 +8,17 @@ const ClientProfile = () => {
   const { name, email } = JSON.parse(localStorage.getItem('user'));
   const [userEmail] = useState(email);
   const [newName, setNewName] = useState(name);
-  const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null);
 
   const handleChangeName = async () => {
     const { data } = await postUpdateName(newName, email);
-    if (data.token) { localStorage.setItem('user', JSON.stringify(data)); setError(data.message); }
-    return setError(data.message);
+    if (data.token) { localStorage.setItem('user', JSON.stringify(data)); setMessage(data.message); }
+    return setMessage(data.message);
   };
 
   useEffect(() => { }, [setNewName]);
+
+  if (!name || !email) return <Redirect to="/login" />;
 
   return (
     <div>
@@ -28,7 +31,7 @@ const ClientProfile = () => {
           data-testid="profile-name-input"
           type="email"
           required
-          onChange={ (e) => setNewName(e.target.value) && setError(null) }
+          onChange={ (e) => setNewName(e.target.value) && setMessage(null) }
           value={ newName }
         />
       </label>
@@ -55,7 +58,7 @@ const ClientProfile = () => {
       >
         Salvar
       </button>
-      { error && <p>{error}</p> }
+      { message && <p>{message}</p> }
     </div>
   );
 };
