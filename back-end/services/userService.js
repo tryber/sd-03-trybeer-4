@@ -31,7 +31,7 @@ const RegisterUser = async (userData) => {
   return { status, message };
 };
 
-// const { JWT_SECRET } = process.env;
+const { JWT_SECRET } = process.env;
 
 const jwtConfig = {
   expiresIn: '7d',
