@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const getUserFromAPI = async (email, password) => {
+export const getUserFromAPI = async (email, password) => {
   const response = await axios({
     baseURL: 'http://localhost:3001/login',
     method: 'post',
@@ -14,4 +14,16 @@ const getUserFromAPI = async (email, password) => {
   return response;
 };
 
-export default getUserFromAPI;
+export const postUpdateName = async (name, email) => {
+  const response = await axios({
+    baseURL: 'http://localhost:3001/profile',
+    method: 'post',
+    data: {
+      name,
+      email,
+    },
+  })
+    .catch(({ err }) => err);
+
+  return response;
+};

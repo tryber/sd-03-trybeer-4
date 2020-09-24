@@ -1,0 +1,20 @@
+.client-profile > label {
+  color: white;
+  font-size: 22px;
+}
+
+.client-profile > label > input {
+  border-radius: 5px;
+  border: 1px solid white;
+  height: 25px;
+  margin: 15px;
+  width: 200px;
+}
+
+.client-profile > button {
+  background-color: #1CD118;
+  border-radius: 5px;
+  font-size: 22px;
+  margin-top: 15px;
+  width: 200px;
+}
