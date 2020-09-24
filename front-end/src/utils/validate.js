@@ -11,7 +11,7 @@ export default (name, value) => {
     case name === 'password':
       return value.length >= passwordLength;
     case name === 'seller':
-    return true;
+      return true;
     default:
       return false;
   }

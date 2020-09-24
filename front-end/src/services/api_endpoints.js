@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 export const getUserFromAPI = async (email, password) => {
-  const response = await axios({
+  const dataResponse = await axios({
     baseURL: 'http://localhost:3001/login',
     method: 'post',
     data: {
@@ -9,26 +9,25 @@ export const getUserFromAPI = async (email, password) => {
       password,
     },
   })
-  .then(({ data }) => data)
-  .catch(({ response }) => response);
+    .then(({ data }) => data)
+    .catch(({ response }) => response);
 
-  return response;
+  return dataResponse;
 };
 
 export const postNewUserAPI = async (name, email, password, seller) => {
-  const response = await axios({
+  const dataResponse = await axios({
     baseURL: 'http://localhost:3001/register',
     method: 'post',
     data: {
       name,
       email,
       password,
-      seller
+      seller,
     },
   })
     .then((resp) => resp.data)
     .catch(({ response }) => response.data);
 
-  return response;
+  return dataResponse;
 };
-
