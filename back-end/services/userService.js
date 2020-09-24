@@ -2,9 +2,9 @@ const jwt = require('jsonwebtoken');
 const { createUser } = require('../models/userModel');
 const { getUserByEmail } = require('../models/userModel');
 
-// const { JWT_SECRET } = process.env;
+const { JWT_SECRET } = process.env;
 
-const JWT_SECRET = 'tentecerveja';
+// const JWT_SECRET = 'tentecerveja';
 const jwtConfig = {
   expiresIn: '7d',
   algorithm: 'HS256',
