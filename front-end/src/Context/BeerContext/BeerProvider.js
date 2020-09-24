@@ -6,7 +6,7 @@ const BeerProvider = ({ children }) => {
   const [cartProducts, setCartProducts] = useState([]);
 
   const updateQuantity = (quantity, productName) => {
-    setCartProducts(cartProducts.map((product) => {
+    setCartProducts((currentState) => currentState.map((product) => {
       if (product.name === productName) {
         return { ...product, quantity };
       }
@@ -20,52 +20,36 @@ const BeerProvider = ({ children }) => {
 
 
   const addProduct = (productName, price, quantity, imageURL) => {
-    setCartProducts((currentState) => ([...currentState, {
-      name: productName,
-      price,
-      quantity,
-      imageURL,
-    }]));
+      setCartProducts((currentState) => { 
+        console.log(currentState);
+        return ([...currentState, {
+        name: productName,
+        price,
+        quantity,
+        imageURL,
+      }]);
+    });
   }
 
-  // const updateCart = (quantity, productName = '', price = '', imageURL = '') => {
-  //   setCartProducts((currentState) =>
-  //    currentState.reduce((newCart, product) => {
-  //      console.log(newCart, product);
-  //       if (productName === product.name) {
-  //         return newCart.push({
-  //           name: productName,
-  //           price,
-  //           quantity,
-  //           imageURL,
-  //         });
-  //       }
-  //     return newCart.push(product);
-  //   }, []));
-  // }
+  const updateProduct = (quantity, productName) => {
+    if (cartProducts.some(({ name }) => productName === name)) {
+      return setCartProducts((currentState) => {
+        currentState.reduce((cartProducts, product) => {
+          if (product.name === productName) {
+            return cartProducts.push({ ...product, quantity });
+          }
+          return cartProducts.push(product);
+        }, [])
+      })
+    }
+    return 
+  }
 
-  // const updateCart = (quantity, productName = '', price = '', imageURL = '') => {
-  //   if (quantity === 0) return setCartProducts((currentState) =>
-  //     currentState.filter(({ name }) => (productName !== name)));
-  //   if (quantity === 1) {
-  //     return setCartProducts((currentState) => ([...currentState, {
-  //       name: productName,
-  //       price,
-  //       quantity,
-  //       imageURL,
-  //     }]));
-  //   }
-  //   return setCartProducts(cartProducts.map((product) => {
-  //     if (product.name === productName) {
-  //       return { ...product, quantity };
-  //     }
-  //     return product;
-  //   }));
-  // };
   const context = {
-    updateQuantity,
+    updateProduct,
     removeProduct,
     addProduct,
+    cartProducts,
   };
   return (
     <BeerContext.Provider value={ context }>

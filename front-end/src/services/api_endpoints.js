@@ -30,3 +30,14 @@ export const postNewUserAPI = async (name, email, password, seller) => {
 
   return dataResponse;
 };
+
+export const getProductsFromAPI = async () => {
+  const response = await axios({
+    baseURL: 'http://localhost:3001/products',
+    method: 'get',
+  })
+    .then((resp) => resp.data)
+    .catch(({ err }) => err);
+
+  return response;
+};

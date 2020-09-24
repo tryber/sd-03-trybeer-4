@@ -12,18 +12,15 @@ const BeerCard = ({
   const initialQuantity = 0;
   const sumQuantity = 1;
   const discountValue = 0.1;
-  const { addProduct, removeProduct, updateQuantity } = useContext(BeerContext);
+  // const { handleCartProducts } = useContext(BeerContext);
   const [quantity, setQuantity] = useState(initialQuantity);
-
-  const updateProductToCart = (updateQuantityValue) => {
-
-  };
 
   return (
     <div className="product">
       <div className="product-values">
         <div>
           <span
+            data-testid={ `${index}-product-price` }
             className="original-product-price"
           >
             R$
@@ -31,7 +28,6 @@ const BeerCard = ({
           </span>
           <span
             className="product-price"
-            data-testid={ `${index}-product-price` }
           >
             R$
             { price - price * discountValue }
@@ -54,20 +50,22 @@ const BeerCard = ({
         <label htmlFor="add">
           Adicionar
           <input
+            data-testid={`${index}-product-plus`}
             id="add"
             type="button"
             className="qty-button qty-button-plus"
-            onClick={ () => updateProductToCart(sumQuantity) }
+            // onClick={ () => updateProductCart(sumQuantity) }
           />
         </label>
         <span className="product-quantity">{ quantity }</span>
         <label htmlFor="remove">
           Remover
           <input
+            data-testid={`${index}-product-minus`}
             id="remove"
             type="button"
             className="qty-button qty-button-subtract"
-            onClick={ () => updateProductToCart(-sumQuantity) }
+            // onClick={ () => updateProductCart(-sumQuantity) }
           />
         </label>
       </div>
@@ -79,7 +77,7 @@ BeerCard.propTypes = {
   imageURL: PropTypes.string.isRequired,
   productName: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
+  index: PropTypes.string.isRequired,
 };
 
 export default BeerCard;
