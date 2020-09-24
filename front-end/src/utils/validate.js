@@ -10,6 +10,8 @@ export default (name, value) => {
       return regExrEmail.test(value);
     case name === 'password':
       return value.length >= passwordLength;
+    case name === 'seller':
+      return true;
     default:
       return false;
   }

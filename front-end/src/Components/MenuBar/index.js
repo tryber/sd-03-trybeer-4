@@ -24,7 +24,7 @@ const MenuBar = ({ titleName }) => {
             <li><Link data-testid="side-menu-item-products" to="/products">Produtos</Link></li>
             <li><Link data-testid="side-menu-item-my-orders" to="/orders">Meus pedidos</Link></li>
             <li><Link data-testid="side-menu-item-my-profile" to="/profile">Meu perfil</Link></li>
-            <li><Link data-testid="side-menu-item-logout" to="/">Sair</Link></li>
+            <li><Link data-testid="side-menu-item-logout" to="/login">Sair</Link></li>
           </ul>
         </nav>
       </div>
