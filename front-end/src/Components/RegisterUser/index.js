@@ -39,7 +39,6 @@ const RegisterUser = () => {
     if (user) return setRedirect({ redirect: true, role: user.role });
     return null;
   };
-
   if (redirect) {
     return (role === 'client'
       ? <Redirect to="/products" />
