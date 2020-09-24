@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import validateInput from '../../utils/validate';
-import getUserFromAPI from '../../services/api_endpoints';
+import { getUserFromAPI } from '../../services/api_endpoints';
 import './login.css';
 
 function LoginPage() {
   const [form, setForm] = useState({ email: '', password: '' });
+  const [userRole, setUserRole] = useState('');
   const { email, password } = form;
 
   const handleInput = (e) => {
@@ -17,10 +18,16 @@ function LoginPage() {
 
   const getUserData = async () => {
     const { data } = await getUserFromAPI(email, password);
-    // console.log('O QUE VEM ? POST REQUEST LOGIN', data);
-    if (data.token) { localStorage.setItem('user', JSON.stringify(data)); }
+    const { role, token } = data;
+    if (token) {
+      localStorage.setItem('user', JSON.stringify(data));
+      setUserRole(role);
+    }
     return true;
   };
+
+  if (userRole === 'administrator') return <Redirect to="/admin/orders" />;
+  if (userRole === 'client') return <Redirect to="/products" />;
 
   return (
     <div className="form">

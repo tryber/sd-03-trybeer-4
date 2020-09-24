@@ -4,7 +4,9 @@ const cors = require('cors');
 
 const { registerController } = require('./controllers/userController');
 const { loginController } = require('./controllers/userController');
-// const authMiddleware = require('./middlewares/auth');
+const { updateNameController } = require('./controllers/userController');
+
+const authMiddleware = require('./middlewares/auth');
 
 const app = express();
 
@@ -24,5 +26,7 @@ app.get('/products', (req, res) => console.log(req.body, '---', res));
 app.post('/login', (req, res) => loginController(req, res));
 
 app.post('/register', (req, res) => registerController(req, res));
+
+app.post('/profile', (req, res) => updateNameController(req, res));
 
 app.listen(3001, () => console.log('Listening on port 3001!'));
