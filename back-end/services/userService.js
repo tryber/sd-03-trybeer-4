@@ -52,7 +52,7 @@ const UpdateUserName = async (userName, userEmail) => {
   const user = await getUserByEmail(userEmail);
   const { password, id, ...userData } = user;
   const token = jwt.sign(userData, JWT_SECRET || 'tentecerveja', jwtConfig);
-  return { ...userData, token, message: 'Nome atualizado sucesso.' };
+  return { ...userData, token, message: 'Atualização concluída com sucesso' };
 };
 
 module.exports = {
