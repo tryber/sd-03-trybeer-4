@@ -16,7 +16,7 @@ export const getUserFromAPI = async (email, password) => {
 
 export const postUpdateName = async (name, email) => {
   const response = await axios({
-    baseURL: 'http://localhost:3001/profile',
+    baseURL: 'http://localhost:3001/orders',
     method: 'post',
     data: {
       name,
@@ -26,4 +26,14 @@ export const postUpdateName = async (name, email) => {
     .catch(({ err }) => err);
 
   return response;
+};
+
+export const getOrderList = async () => {
+  const orders = await axios({
+    baseURL: 'http://localhost:3001/profile',
+    method: 'get',
+  })
+    .catch(({ err }) => err);
+
+  return orders;
 };

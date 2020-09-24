@@ -22,9 +22,9 @@ const MenuBar = ({ titleName }) => {
         <nav className={ change ? 'side-menu-container change' : 'side-menu-container' }>
           <ul>
             <li><Link data-testid="side-menu-item-products" to="/products">Produtos</Link></li>
-            <li><Link data-testid="side-menu-item-my-orders" to="/register">Meus pedidos</Link></li>
-            <li><Link data-testid="side-menu-item-my-profile" to="/register">Meu perfil</Link></li>
-            <li><Link data-testid="side-menu-item-logout" to="/register">Sair</Link></li>
+            <li><Link data-testid="side-menu-item-my-orders" to="/orders">Meus pedidos</Link></li>
+            <li><Link data-testid="side-menu-item-my-profile" to="/profile">Meu perfil</Link></li>
+            <li><Link data-testid="side-menu-item-logout" to="/">Sair</Link></li>
           </ul>
         </nav>
       </div>
