@@ -27,7 +27,10 @@ export const postNewUserAPI = async (name, email, password, seller) => {
       seller,
     },
   })
-    .catch((err) => err);
+    .then((resp) => resp.data)
+    .catch(({ response }) => response.data);
+  
+  return response;
 };
 
 export const postUpdateName = async (name, email) => {
