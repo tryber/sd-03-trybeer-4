@@ -17,7 +17,7 @@ export const getUserFromAPI = async (email, password) => {
 };
 
 export const postNewUserAPI = async (name, email, password, seller) => {
-  const response = await axios({
+  const dataResponse = await axios({
     baseURL: `${url}register`,
     method: 'post',
     data: {
@@ -29,8 +29,8 @@ export const postNewUserAPI = async (name, email, password, seller) => {
   })
     .then((resp) => resp.data)
     .catch(({ response }) => response.data);
-  
-  return response;
+
+  return dataResponse;
 };
 
 export const postUpdateName = async (name, email) => {
