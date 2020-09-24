@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { postUpdateName } from '../../services/api_endpoints';
 import { Redirect } from 'react-router-dom';
+import { postUpdateName } from '../../services/api_endpoints';
 import MenuBar from '../MenuBar/index';
 import './styles.css';
 
