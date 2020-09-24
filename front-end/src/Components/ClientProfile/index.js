@@ -18,11 +18,10 @@ const ClientProfile = () => {
 
   useEffect(() => { }, [setNewName]);
 
-  // if (!name) return <Redirect to="/login" />;
+  if (!name) return <Redirect to="/login" />;
 
   return (
     <div className="client-profile">
-      {console.log('name: ', name)}
       <MenuBar titleName="Meu perfil" />
       <label htmlFor="name">
         Nome
