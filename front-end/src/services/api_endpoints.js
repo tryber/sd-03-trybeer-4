@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 export const getUserFromAPI = async (email, password) => {
-  const dataResponse = await axios({
+  const response = await axios({
     baseURL: 'http://localhost:3001/login',
     method: 'post',
     data: {
@@ -9,10 +9,9 @@ export const getUserFromAPI = async (email, password) => {
       password,
     },
   })
-    .then(({ data }) => data)
-    .catch(({ response }) => response);
+    .catch(({ err }) => err);
 
-  return dataResponse;
+  return response;
 };
 
 export const postNewUserAPI = async (name, email, password, seller) => {
