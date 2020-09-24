@@ -17,20 +17,21 @@ const mockProducts = [
 ];
 
 const ProductsPage = () => {
-  const [total, setTotal] = useState(0.00);
   const [productList, setProductList] = useState(mockProducts);
-  console.log(productList);
 
-  useEffect(async () => {
-    // const products = await getProductsFromAPI();
-    // setProductList(products);
-  }, []);
+  // useEffect(() => {
+  //   // const fetchProducts = async () => {
+  //   //   const products = await getProductsFromAPI();
+  //   //   setProductList(products);
+  //   // }
+  //   // fetchProducts();
+  // }, []);
 
   return (
     <div className="products-list">
-      <MenuBar />
+      <MenuBar titleName="Produtos"/>
        {productList.map(({ name, price, image }, index) => (
-         <BeerCard productName={name} price={price} imageURL={image} index={index} />
+         <BeerCard productName={name} price={price} imageURL={image} index={index} key={name} />
       )) }
       <Link to="/checkout">
         <button

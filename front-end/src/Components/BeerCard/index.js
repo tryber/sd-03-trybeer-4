@@ -1,6 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
+import {
+  addProductToLocalStorage,
+  removeLocalStorage,
+  updateProductInLocalStorage,
+} from '../../utils/localStorage';
 import BeerContext from '../../Context/BeerContext/BeerContext';
 
 const BeerCard = ({
@@ -14,6 +19,19 @@ const BeerCard = ({
   const discountValue = 0.1;
   // const { handleCartProducts } = useContext(BeerContext);
   const [quantity, setQuantity] = useState(initialQuantity);
+
+  const handleQuantity = (sumValue) => {
+    setQuantity((currentValue) => {
+      const calculateQuantity = currentValue + sumValue;
+      return calculateQuantity >= 0 ? calculateQuantity : initialQuantity;
+    });
+  }
+
+  useEffect(() => {
+    if (quantity <= 0) {
+      // removeLocalStorage(productName);
+    }
+  }, [quantity]);
 
   return (
     <div className="product">
@@ -54,7 +72,7 @@ const BeerCard = ({
             id="add"
             type="button"
             className="qty-button qty-button-plus"
-            // onClick={ () => updateProductCart(sumQuantity) }
+            onClick={ () => handleQuantity(sumQuantity) }
           />
         </label>
         <span className="product-quantity">{ quantity }</span>
@@ -65,7 +83,7 @@ const BeerCard = ({
             id="remove"
             type="button"
             className="qty-button qty-button-subtract"
-            // onClick={ () => updateProductCart(-sumQuantity) }
+            onClick={ () => handleQuantity(-sumQuantity) }
           />
         </label>
       </div>
@@ -76,8 +94,8 @@ const BeerCard = ({
 BeerCard.propTypes = {
   imageURL: PropTypes.string.isRequired,
   productName: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
-  index: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default BeerCard;
