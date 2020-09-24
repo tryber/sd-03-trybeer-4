@@ -6,7 +6,7 @@ const { registerController } = require('./controllers/userController');
 const { loginController } = require('./controllers/userController');
 const { updateNameController } = require('./controllers/userController');
 
-const authMiddleware = require('./middlewares/auth');
+// const authMiddleware = require('./middlewares/auth');
 
 const app = express();
 
