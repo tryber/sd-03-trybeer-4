@@ -1,8 +1,10 @@
 const axios = require('axios');
 
+const url = 'http://localhost:3001/';
+
 export const getUserFromAPI = async (email, password) => {
   const response = await axios({
-    baseURL: 'http://localhost:3001/login',
+    baseURL: `${url}login`,
     method: 'post',
     data: {
       email,
@@ -16,7 +18,7 @@ export const getUserFromAPI = async (email, password) => {
 
 export const postNewUserAPI = async (name, email, password, seller) => {
   const dataResponse = await axios({
-    baseURL: 'http://localhost:3001/register',
+    baseURL: `${url}register`,
     method: 'post',
     data: {
       name,
@@ -31,9 +33,24 @@ export const postNewUserAPI = async (name, email, password, seller) => {
   return dataResponse;
 };
 
+export const postUpdateName = async (name, email) => {
+  const response = await axios({
+    baseURL: `${url}profile`,
+    method: 'post',
+    data: {
+      name,
+      email,
+    },
+  })
+    .then((resp) => resp.data)
+    .catch(({ err }) => err);
+
+  return response;
+};
+
 export const getProductsFromAPI = async () => {
   const response = await axios({
-    baseURL: 'http://localhost:3001/products',
+    baseURL: `${url}products`,
     method: 'get',
   })
     .then((resp) => resp.data)

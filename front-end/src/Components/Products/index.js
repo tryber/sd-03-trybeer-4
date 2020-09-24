@@ -19,13 +19,15 @@ const mockProducts = [
 const ProductsPage = () => {
   const [productList, setProductList] = useState(mockProducts);
 
-  // useEffect(() => {
-  //   // const fetchProducts = async () => {
-  //   //   const products = await getProductsFromAPI();
-  //   //   setProductList(products);
-  //   // }
-  //   // fetchProducts();
-  // }, []);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const products = await getProductsFromAPI();
+      // setProductList(products);
+      console.log(products);
+      return products;
+    }
+   fetchProducts();
+  }, []);
 
   return (
     <div className="products-list">

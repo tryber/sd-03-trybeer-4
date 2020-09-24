@@ -6,9 +6,9 @@ import './login.css';
 
 function LoginPage() {
   const [form, setForm] = useState({ email: '', password: '' });
-  const [logged, setLogged] = useState({ redirect: false, role: '' });
+  const [userRole, setUserRole] = useState('');
+
   const { email, password } = form;
-  const { redirect, role } = logged;
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -19,18 +19,17 @@ function LoginPage() {
 
   const getUserData = async () => {
     const { data } = await getUserFromAPI(email, password);
-    // console.log('O QUE VEM ? POST REQUEST LOGIN', data);
-    if (data.token) {
+    const { role, token } = data;
+    if (token) {
       localStorage.setItem('user', JSON.stringify(data));
-      setLogged({ redirect: true, role: data.role });
+      setUserRole(role);
     }
     return true;
   };
-  if (redirect) {
-    return (role === 'client'
-      ? <Redirect to="/products" />
-      : <Redirect to="/admin/orders" />);
-  }
+
+  if (userRole === 'administrator') return <Redirect to="/admin/orders" />;
+  if (userRole === 'client') return <Redirect to="/products" />;
+
   return (
     <div className="form">
       <label htmlFor="email">

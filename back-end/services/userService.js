@@ -1,12 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { createUser } = require('../models/userModel');
-const { getUserByEmail } = require('../models/userModel');
-
-const { JWT_SECRET } = process.env;
-const jwtConfig = {
-  expiresIn: '7d',
-  algorithm: 'HS256',
-};
+const { createUser, getUserByEmail, updateName } = require('../models/userModel');
 
 const ValidadeUser = async (name, email, password, dbEmail) => {
   const validEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
@@ -37,17 +30,33 @@ const RegisterUser = async (userData) => {
   return { status, message };
 };
 
+const { JWT_SECRET } = process.env;
+
+const jwtConfig = {
+  expiresIn: '7d',
+  algorithm: 'HS256',
+};
+
 const LoginUser = async (userEmail, userPass) => {
-  if (userPass === '' || userEmail === '') return { status: 401, message: 'Preencha todos os campos.' };
   const user = await getUserByEmail(userEmail);
   if (user.email !== userEmail) return { status: 404, message: 'Não há cadastro com esse email.' };
   if (user.password !== userPass) return { status: 400, message: 'Senha incorreta.' };
   const { password, id, ...userData } = user;
-  const token = jwt.sign(userData, JWT_SECRET, jwtConfig);
+  const token = jwt.sign(userData, JWT_SECRET || 'tentecerveja', jwtConfig);
   return { ...userData, token };
+};
+
+const UpdateUserName = async (userName, userEmail) => {
+  if (userName.length <= 1 || userName.length > 24) return { status: 400, message: 'Nome inválido.' };
+  await updateName(userName, userEmail);
+  const user = await getUserByEmail(userEmail);
+  const { password, id, ...userData } = user;
+  const token = jwt.sign(userData, JWT_SECRET || 'tentecerveja', jwtConfig);
+  return { ...userData, token, message: 'Atualização concluída com sucesso' };
 };
 
 module.exports = {
   LoginUser,
   RegisterUser,
+  UpdateUserName,
 };

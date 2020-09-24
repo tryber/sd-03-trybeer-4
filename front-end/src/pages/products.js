@@ -1,6 +1,6 @@
 import React from 'react';
-import { Products } from '../Components';
+import Products from '../Components/Products';
 
-const products = () => <Products />;
+const orders = () => <Products />;
 
-export default products;
+export default orders;
