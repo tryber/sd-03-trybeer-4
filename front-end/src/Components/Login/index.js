@@ -9,7 +9,6 @@ function LoginPage() {
   const [userRole, setUserRole] = useState('');
 
   const { email, password } = form;
-  const { redirect, role } = logged;
 
   const handleInput = (e) => {
     const { name, value } = e.target;
