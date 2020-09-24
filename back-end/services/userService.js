@@ -2,14 +2,6 @@ const jwt = require('jsonwebtoken');
 const { createUser } = require('../models/userModel');
 const { getUserByEmail } = require('../models/userModel');
 
-const { JWT_SECRET } = process.env;
-
-// const JWT_SECRET = 'tentecerveja';
-const jwtConfig = {
-  expiresIn: '7d',
-  algorithm: 'HS256',
-};
-
 const ValidadeUser = async (name, email, password, dbEmail) => {
   const validEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
   const validName = /^[a-z ,.'-]+$/i.test(name);
@@ -37,6 +29,13 @@ const RegisterUser = async (userData) => {
     return { status: 201, message: 'Usuário criado com sucesso!', user };
   }
   return { status, message };
+};
+
+// const { JWT_SECRET } = process.env;
+
+const jwtConfig = {
+  expiresIn: '7d',
+  algorithm: 'HS256',
 };
 
 const LoginUser = async (userEmail, userPass) => {
