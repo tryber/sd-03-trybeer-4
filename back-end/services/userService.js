@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { createUser } = require('../models/userModel');
-const { getUserByEmail } = require('../models/userModel');
-const { updateName } = require('../models/userModel');
+const { createUser, getUserByEmail, updateName } = require('../models/userModel');
 
 const { JWT_SECRET } = process.env;
 const jwtConfig = {
