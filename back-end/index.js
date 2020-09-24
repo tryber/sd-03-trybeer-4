@@ -16,7 +16,7 @@ app.get('/', (_req, res) => {
   res.send();
 });
 
-app.get('/products', (req, res));
+app.get('/products', (req, res) => console.log(req.body, '---', res));
 
 // Rota Get Testando Middleware de Validação do Token JWT
 // app.get('/auth', authMiddleware);
