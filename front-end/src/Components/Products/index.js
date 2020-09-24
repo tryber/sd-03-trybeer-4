@@ -4,15 +4,14 @@ import getProductsFromAPI from '../../services/api_endpoints';
 import MenuBar from '../MenuBar';
 
 function ProductsPage() {
-  const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0.00);
 
-  setItems(getProductsFromAPI);
+  const itemList = getProductsFromAPI;
 
   return (
     <div>
       <MenuBar />
-       {/* {items.map(({ name, price, url_image }) => (
+       {/* {itemList.map(({ name, price, url_image }) => (
          <Card name={name} price={price} image={url_image} />
       )) } */}
     </div>
