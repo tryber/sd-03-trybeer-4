@@ -19,22 +19,23 @@ const ValidadeUser = async (name, email, password, dbEmail) => {
   }
 };
 
-const RegisterUser = async (userData) => {
-  const { name, email, password, seller } = userData;
-  const { email: duplicateEmail } = await getUserByEmail(email);
-  const { status, message } = await ValidadeUser(name, email, password, duplicateEmail);
-  if (status === 200) {
-    const user = await createUser(name, email, password, seller);
-    return { status: 201, message: 'Usuário criado com sucesso!', user };
-  }
-  return { status, message };
-};
-
 const { JWT_SECRET } = process.env;
 
 const jwtConfig = {
   expiresIn: '7d',
   algorithm: 'HS256',
+};
+
+const RegisterUser = async (userData) => {
+  const { name, email, password, seller } = userData;
+  const { email: duplicateEmail } = await getUserByEmail(email);
+  const { status, message } = await ValidadeUser(name, email, password, duplicateEmail);
+  if (status === 200) {
+    const { password: _pass, id, ...user } = await createUser(name, email, password, seller);
+    const token = jwt.sign(user, JWT_SECRET || 'tentecerveja', jwtConfig);
+    return { status: 201, message: 'Usuário criado com sucesso!', token };
+  }
+  return { status, message };
 };
 
 const LoginUser = async (userEmail, userPass) => {
