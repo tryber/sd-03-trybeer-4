@@ -7,7 +7,6 @@ import './login.css';
 function LoginPage() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [userRole, setUserRole] = useState('');
-
   const { email, password } = form;
 
   const handleInput = (e) => {

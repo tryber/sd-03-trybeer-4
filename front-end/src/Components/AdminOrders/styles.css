@@ -1,0 +1,10 @@
+.admin-orders {
+  display: flex;
+}
+
+.admin-orders-aside {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
