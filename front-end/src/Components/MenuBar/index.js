@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './styles.css';
-import '../../index.css';
 
 const MenuBar = ({ titleName }) => {
   const [change, setChange] = useState(false);
 
   return (
-    <div className="menu-container">
+    <section>
       <div className="menu">
         <button
           data-testid="top-hamburguer"
@@ -29,10 +28,10 @@ const MenuBar = ({ titleName }) => {
           </ul>
         </nav>
       </div>
-      <div className={ change ? 'menu-bg change-bg box-shadow' : 'menu-bg box-shadow' }>
+      <div className={ change ? 'menu-bg change-bg' : 'menu-bg' }>
         <h2 data-testid="top-title" className="title">{ titleName }</h2>
       </div>
-    </div>
+    </section>
   );
 };
 

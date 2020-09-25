@@ -1,6 +1,6 @@
 import React from 'react';
-import Products from '../Components/Products';
+import MenuBar from '../Components/MenuBar';
 
-const orders = () => <Products />;
+const orders = () => <MenuBar titleName="TryBeer" />;
 
 export default orders;

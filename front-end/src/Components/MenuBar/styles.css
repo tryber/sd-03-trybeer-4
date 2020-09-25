@@ -1,11 +1,12 @@
+body {
+  background-color: #6c7a86;
+  font-family: "Roboto", sans-serif;
+}
+
 .title {
   color: white;
   position: relative;
-  top: 15px;
-}
-
-.menu-container {
-  margin-bottom: 150px;
+  top: 15px
 }
 
 .menu {
@@ -75,7 +76,7 @@
 }
 
 .menu-bg {
-  background: #1f2B20;
+  background: black;
   height: 100px;
   transition: 0.3s ease;
   width: 100%;

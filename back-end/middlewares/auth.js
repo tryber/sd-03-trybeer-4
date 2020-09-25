@@ -1,20 +1,30 @@
 const jwt = require('jsonwebtoken');
+const userModel = require('../models/userModel');
 
-const tokenHandler = (token, next) => {
+// const { JWT_SECRET } = process.env;
+const JWT_SECRET = 'tentecerveja';
+const authMiddleware = async (req, res, next) => {
+  const token = req.headers.authorization;
+
+  if (!token) return res.send(401);
+
   try {
-    const JWT_SECRET = 'tentecerveja';
-    return jwt.verify(token, JWT_SECRET);
-  } catch (err) {
-    return next({ status: 401, message: err.message });
-  }
-};
+    const payload = jwt.verify(token, JWT_SECRET);
 
-const authMiddleware = (required) => async (req, _res, next) => {
-  const { authorization } = req.headers;
-  if (!required) return next();
-  if (!authorization) return next({ status: 401, message: 'Usuário não logado' });
-  req.user = tokenHandler(authorization, next);
-  return next();
+    const user = await userModel.getUserByEmail(payload.email);
+
+    if (!user) {
+      return res.status(400).json({ error: 'Erro ao procurar usuario do token.' });
+    }
+
+    const { password, ...dataUser } = user;
+
+    req.user = dataUser;
+
+    return next();
+  } catch (err) {
+    return res.status(401).json({ error: 'Token inválido.' });
+  }
 };
 
 module.exports = authMiddleware;
