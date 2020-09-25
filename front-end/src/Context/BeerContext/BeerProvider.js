@@ -6,7 +6,6 @@ import { getProductsFromAPI } from '../../services/api_endpoints';
 
 const BeerProvider = ({ children }) => {
   const { token } = getProductsLocalStorage('user');
-  console.log(token);
   const zero = 0;
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(zero);
@@ -17,7 +16,7 @@ const BeerProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const productsDB = await getProductsFromAPI(token);
+      const productsDB = await getProductsFromAPI(token) || [];
       handleProductList(productsDB);
     };
     fetchProducts();
