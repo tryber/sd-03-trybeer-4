@@ -5,7 +5,7 @@ import validateInput from '../../utils/validate';
 import { postNewUserAPI } from '../../services/api_endpoints';
 import './styles.css';
 
-const beers = require('../../images/beers.png');
+const friends = require('../../images/friends.png');
 
 const RegisterUser = () => {
   const [form, setForm] = useState({
@@ -48,7 +48,7 @@ const RegisterUser = () => {
     <>
       <MenuBar titleName="TryBeer" />
       <section className="register-container default-color shadow">
-        <img src={ beers } alt="Icone de duas cervejas" width="100px" />
+        <img src={ friends } alt="Icone de duas cervejas" width="100px" />
         {error.message && <p>{error.message}</p>}
         <form>
           <label htmlFor="userName">
