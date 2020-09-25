@@ -1,55 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import BeerContext from './BeerContext';
+import { getProductsLocalStorage, removeLocalStorage } from '../../utils/localStorage';
+import { getProductsFromAPI } from '../../services/api_endpoints';
 
 const BeerProvider = ({ children }) => {
-  const [cartProducts, setCartProducts] = useState([]);
+  const zero = 0;
+  const [products, setProducts] = useState([]);
+  const [total, setTotal] = useState(zero);
 
-  const updateQuantity = (quantity, productName) => {
-    setCartProducts((currentState) => currentState.map((product) => {
-      if (product.name === productName) {
-        return { ...product, quantity };
-      }
-      return product;
-    }));
-  }
+  const handleProductList = (productList) => setProducts(productList.map((product) => ({
+    ...product, quantity: 0,
+  })));
 
-  const removeProduct = (productName) => 
-    setCartProducts((currentState) =>
-      currentState.filter(({ name }) => (productName !== name)));
+  // const handleTotal = (cartProducts) => setTotal(cartProducts.reduce(
+  //   (totalValue, { price, quantity }) => totalValue + price * quantity, zero,
+  // ));
 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productsDB = await getProductsFromAPI();
+      handleProductList(productsDB);
+    };
+    fetchProducts();
+  }, []);
 
-  const addProduct = (productName, price, quantity, imageURL) => {
-      setCartProducts((currentState) => { 
-        console.log(currentState);
-        return ([...currentState, {
-        name: productName,
-        price,
-        quantity,
-        imageURL,
-      }]);
-    });
-  }
-
-  const updateProduct = (quantity, productName) => {
-    if (cartProducts.some(({ name }) => productName === name)) {
-      return setCartProducts((currentState) => {
-        currentState.reduce((cartProducts, product) => {
-          if (product.name === productName) {
-            return cartProducts.push({ ...product, quantity });
-          }
-          return cartProducts.push(product);
-        }, [])
-      })
-    }
-    return 
-  }
+  useEffect(() => {
+    const cartProducts = getProductsLocalStorage();
+    setProducts((currentProducts) => currentProducts.map(
+      (element) => cartProducts.reduce((newProduct, { productName, quantity }) => {
+        if (productName === element.name) return { ...element, quantity };
+        if (quantity === zero) removeLocalStorage(productName);
+        return newProduct;
+      }, element),
+    ));
+  }, [total]);
 
   const context = {
-    updateProduct,
-    removeProduct,
-    addProduct,
-    cartProducts,
+    handleProductList,
+    products,
+    total,
+    setTotal,
+    setProducts,
+    // handleTotal,
   };
   return (
     <BeerContext.Provider value={ context }>

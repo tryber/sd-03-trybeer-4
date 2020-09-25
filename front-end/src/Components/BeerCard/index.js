@@ -1,37 +1,55 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import BeerContext from '../../Context/BeerContext/BeerContext';
 import './styles.css';
 import {
   addProductToLocalStorage,
-  removeLocalStorage,
   updateProductInLocalStorage,
+  getProductsLocalStorage,
 } from '../../utils/localStorage';
-import BeerContext from '../../Context/BeerContext/BeerContext';
 
 const BeerCard = ({
   productName,
   price,
   imageURL,
+  initialQuantity,
   index,
 }) => {
-  const initialQuantity = 0;
   const sumQuantity = 1;
   const discountValue = 0.1;
-  // const { handleCartProducts } = useContext(BeerContext);
+  const zero = 0;
   const [quantity, setQuantity] = useState(initialQuantity);
+  const { setTotal } = useContext(BeerContext);
 
   const handleQuantity = (sumValue) => {
+    setTotal((currentTotal) => {
+      const total = currentTotal + sumValue * price;
+      return total >= zero ? total : zero;
+    });
     setQuantity((currentValue) => {
       const calculateQuantity = currentValue + sumValue;
-      return calculateQuantity >= 0 ? calculateQuantity : initialQuantity;
+      if (calculateQuantity >= 1) {
+        addProductToLocalStorage({
+          productName,
+          price,
+          imageURL,
+          quantity: calculateQuantity,
+        });
+        return calculateQuantity;
+      }
+      updateProductInLocalStorage(productName, zero);
+      return zero;
     });
-  }
+  };
 
   useEffect(() => {
-    if (quantity <= 0) {
-      // removeLocalStorage(productName);
-    }
-  }, [quantity]);
+    const saveProducts = getProductsLocalStorage();
+    saveProducts.forEach(({ productName: name, quantity: actualQuantity }) => {
+      if (name === productName) {
+        handleQuantity(actualQuantity);
+      }
+    });
+  }, []);
 
   return (
     <div className="product">
@@ -42,13 +60,19 @@ const BeerCard = ({
             className="original-product-price"
           >
             R$
-            { price }
+            { ` ${price.toLocaleString('pt-BR', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}` }
           </span>
           <span
             className="product-price"
           >
             R$
-            { price - price * discountValue }
+            { ` ${(price - price * discountValue).toLocaleString('pt-BR', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}`}
           </span>
         </div>
         <span className="discount">-10%</span>
@@ -56,7 +80,7 @@ const BeerCard = ({
       <div className="product-img">
         <img
           data-testid={ `${index}-product-img` }
-          src={ imageURL }
+          src={ require(`../../images/${imageURL}.jpg`) }
           alt={ `imagem de um ${productName}` }
           width="100px"
         />
@@ -68,18 +92,18 @@ const BeerCard = ({
         <label htmlFor="add">
           Adicionar
           <input
-            data-testid={`${index}-product-plus`}
+            data-testid={ `${index}-product-plus` }
             id="add"
             type="button"
             className="qty-button qty-button-plus"
             onClick={ () => handleQuantity(sumQuantity) }
           />
         </label>
-        <span className="product-quantity">{ quantity }</span>
+        <span data-testid={ `${index}-product-qtd` } className="product-quantity">{ quantity }</span>
         <label htmlFor="remove">
           Remover
           <input
-            data-testid={`${index}-product-minus`}
+            data-testid={ `${index}-product-minus` }
             id="remove"
             type="button"
             className="qty-button qty-button-subtract"
@@ -95,6 +119,7 @@ BeerCard.propTypes = {
   imageURL: PropTypes.string.isRequired,
   productName: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  initialQuantity: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
 };
 

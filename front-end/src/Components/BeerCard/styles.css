@@ -2,6 +2,7 @@
   background-color: white;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   font-family: 'Montserrat', sans-serif;
   margin: 10px auto;
   max-width: 250px;
@@ -18,7 +19,7 @@
 
 .product:hover img {
   transition: width 0.2s ease-in;
-  width: 120px;
+  width: 200px;
 }
 
 .product-name {
