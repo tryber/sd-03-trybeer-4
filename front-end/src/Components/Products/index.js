@@ -5,18 +5,6 @@ import BeerContext from '../../Context/BeerContext/BeerContext';
 import MenuBar from '../MenuBar';
 import './styles.css';
 
-// import beers from '../../images/beers.png';
-// import greenBeer from '../../images/green-beer.png';
-// import starBeer from '../../images/star-beer.png';
-// import boxBeer from '../../images/box-beers.png';
-
-// const mockProducts = [
-//   { name: 'Beer', price: 19.90, image: beers },
-//   { name: 'Green Beer', price: 14.90, image: greenBeer },
-//   { name: 'Box Beer', price: 49.90, image: boxBeer },
-//   { name: 'Beer P', price: 119.90, image: starBeer },
-// ];
-
 const ProductsPage = () => {
   const initialValue = 0;
   const { total, products } = useContext(BeerContext);
@@ -25,12 +13,12 @@ const ProductsPage = () => {
     <div className="products-list">
       <MenuBar titleName="TryBeer" />
       {products.map(({
-        name, price, quantity,
+        name, price, urlImage, quantity,
       }, index) => (
         <BeerCard
           productName={ name }
           price={ price }
-          imageURL={ name }
+          imageURL={ urlImage }
           initialQuantity={ quantity }
           index={ index }
           key={ name }

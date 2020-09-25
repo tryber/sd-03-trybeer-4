@@ -22,7 +22,6 @@ const BeerCard = ({
   const zero = 0;
   const [quantity, setQuantity] = useState(initialQuantity);
   const { setTotal } = useContext(BeerContext);
-  const URL_IMAGE = require(`../../images/${productName}.jpg`);
 
   const memorizedQuantity = useCallback((sumValue) => {
     setTotal((currentTotal) => {
@@ -83,7 +82,7 @@ const BeerCard = ({
       <div className="product-img">
         <img
           data-testid={ `${index}-product-img` }
-          src={ URL_IMAGE }
+          src={ imageURL }
           alt={ `imagem de um ${productName}` }
           width="100px"
         />
