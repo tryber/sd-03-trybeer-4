@@ -4,6 +4,10 @@ import AdminSideBar from '../AdminSideBar/index';
 import './styles.css';
 
 const AdminProfile = () => {
+  const { name, email } = JSON.parse(localStorage.getItem('user')) || '';
+
+  if (!name) return <Redirect to="/login" />;
+
   return (
     <div className="admin-profile">
       <AdminSideBar />
