@@ -31,7 +31,7 @@ const RegisterUser = async (userData) => {
   const { email: duplicateEmail } = await getUserByEmail(email);
   const { status, message } = await ValidadeUser(name, email, password, duplicateEmail);
   if (status === 200) {
-    const { password: _pass, id, ...user } = await createUser(name, email, password, seller);
+    const { password: _pass, ...user } = await createUser(name, email, password, seller);
     const token = jwt.sign(user, JWT_SECRET || 'tentecerveja', jwtConfig);
     return { status: 201, message: 'Usuário criado com sucesso!', token };
   }
