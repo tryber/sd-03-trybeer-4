@@ -1,17 +1,17 @@
-export const getProductsLocalStorage = () => {
-  const products = JSON.parse(localStorage.getItem('cart'));
+export const getProductsLocalStorage = (key) => {
+  const products = JSON.parse(localStorage.getItem(key));
   return products || [];
 };
 
 export const removeLocalStorage = (productName) => {
-  const products = getProductsLocalStorage();
+  const products = getProductsLocalStorage('cart');
   const newProductList = products.filter((element) => element.productName !== productName);
   localStorage.setItem('cart', JSON.stringify(newProductList));
   return null;
 };
 
 export const updateProductInLocalStorage = (name, quantity) => {
-  const products = getProductsLocalStorage();
+  const products = getProductsLocalStorage('cart');
   const newProductList = products.map((element) => {
     if (element.productName === name) return { ...element, quantity };
     return element;

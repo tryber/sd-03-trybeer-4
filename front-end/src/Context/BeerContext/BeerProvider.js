@@ -5,6 +5,8 @@ import { getProductsLocalStorage, removeLocalStorage } from '../../utils/localSt
 import { getProductsFromAPI } from '../../services/api_endpoints';
 
 const BeerProvider = ({ children }) => {
+  const { token } = getProductsLocalStorage('user');
+  console.log(token);
   const zero = 0;
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(zero);
@@ -13,20 +15,16 @@ const BeerProvider = ({ children }) => {
     ...product, quantity: 0,
   })));
 
-  // const handleTotal = (cartProducts) => setTotal(cartProducts.reduce(
-  //   (totalValue, { price, quantity }) => totalValue + price * quantity, zero,
-  // ));
-
   useEffect(() => {
     const fetchProducts = async () => {
-      const productsDB = await getProductsFromAPI();
+      const productsDB = await getProductsFromAPI(token);
       handleProductList(productsDB);
     };
     fetchProducts();
-  }, []);
+  }, [token]);
 
   useEffect(() => {
-    const cartProducts = getProductsLocalStorage();
+    const cartProducts = getProductsLocalStorage('cart');
     setProducts((currentProducts) => currentProducts.map(
       (element) => cartProducts.reduce((newProduct, { productName, quantity }) => {
         if (productName === element.name) return { ...element, quantity };
@@ -42,8 +40,11 @@ const BeerProvider = ({ children }) => {
     total,
     setTotal,
     setProducts,
-    // handleTotal,
   };
+  if (!token) {
+    window.location.pathname = '/login';
+    return null;
+  }
   return (
     <BeerContext.Provider value={ context }>
       {children}

@@ -45,7 +45,7 @@ const BeerCard = ({
   }, [imageURL, price, productName, setTotal]);
 
   useEffect(() => {
-    const saveProducts = getProductsLocalStorage();
+    const saveProducts = getProductsLocalStorage('cart');
     saveProducts.forEach(({ productName: name, quantity: actualQuantity }) => {
       if (name === productName) {
         memorizedQuantity(actualQuantity);

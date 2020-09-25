@@ -34,9 +34,14 @@ const RegisterUser = () => {
 
   const createNewUser = async () => {
     const unprocessableEntityCode = 422;
-    const { message, status, user } = await postNewUserAPI(name, email, password, seller);
+    const { message, status, token } = await postNewUserAPI(name, email, password, seller);
+    console.log(message, status, token);
     if (status === unprocessableEntityCode) return setError({ message });
-    if (user) return setRedirect({ redirect: true, role: user.role });
+    if (token) {
+      const data = { name, email, token };
+      localStorage.setItem('user', JSON.stringify(data));
+      setRedirect({ redirect: true, role: seller ? 'Administrador' : 'Client' });
+    }
     return null;
   };
   if (redirect) {

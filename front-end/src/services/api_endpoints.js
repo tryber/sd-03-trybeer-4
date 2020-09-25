@@ -48,13 +48,18 @@ export const postUpdateName = async (name, email) => {
   return response;
 };
 
-export const getProductsFromAPI = async () => {
+export const getProductsFromAPI = async (token) => {
+  console.log('axios', token);
   const response = await axios({
     baseURL: `${url}products`,
     method: 'get',
+    headers: {
+      authorization: token,
+    },
   })
     .then((resp) => resp.data)
     .catch(({ err }) => err);
+    
 
   return response;
 };
