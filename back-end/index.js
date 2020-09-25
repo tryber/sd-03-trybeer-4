@@ -20,9 +20,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-app.get('/', (_req, res) => {
-  res.send();
-});
+app.get('/', (_req, res) => res.send());
 
 app.get('/products', (req, res) => getAllProducts(req, res));
 
