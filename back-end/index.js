@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const cors = require('cors');
 
 const {
@@ -17,6 +18,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.get('/', (_req, res) => {
   res.send();
