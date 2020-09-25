@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {
+  useState, useEffect, useContext, useCallback,
+} from 'react';
 import PropTypes from 'prop-types';
 import BeerContext from '../../Context/BeerContext/BeerContext';
 import './styles.css';
@@ -20,8 +22,9 @@ const BeerCard = ({
   const zero = 0;
   const [quantity, setQuantity] = useState(initialQuantity);
   const { setTotal } = useContext(BeerContext);
+  const URL_IMAGE = require(`../../images/${productName}.jpg`);
 
-  const handleQuantity = (sumValue) => {
+  const memorizedQuantity = useCallback((sumValue) => {
     setTotal((currentTotal) => {
       const total = currentTotal + sumValue * price;
       return total >= zero ? total : zero;
@@ -40,16 +43,16 @@ const BeerCard = ({
       updateProductInLocalStorage(productName, zero);
       return zero;
     });
-  };
+  }, [imageURL, price, productName, setTotal]);
 
   useEffect(() => {
     const saveProducts = getProductsLocalStorage();
     saveProducts.forEach(({ productName: name, quantity: actualQuantity }) => {
       if (name === productName) {
-        handleQuantity(actualQuantity);
+        memorizedQuantity(actualQuantity);
       }
     });
-  }, []);
+  }, [memorizedQuantity, productName]);
 
   return (
     <div className="product">
@@ -80,7 +83,7 @@ const BeerCard = ({
       <div className="product-img">
         <img
           data-testid={ `${index}-product-img` }
-          src={ require(`../../images/${imageURL}.jpg`) }
+          src={ URL_IMAGE }
           alt={ `imagem de um ${productName}` }
           width="100px"
         />
@@ -96,7 +99,7 @@ const BeerCard = ({
             id="add"
             type="button"
             className="qty-button qty-button-plus"
-            onClick={ () => handleQuantity(sumQuantity) }
+            onClick={ () => memorizedQuantity(sumQuantity) }
           />
         </label>
         <span data-testid={ `${index}-product-qtd` } className="product-quantity">{ quantity }</span>
@@ -107,7 +110,7 @@ const BeerCard = ({
             id="remove"
             type="button"
             className="qty-button qty-button-subtract"
-            onClick={ () => handleQuantity(-sumQuantity) }
+            onClick={ () => memorizedQuantity(-sumQuantity) }
           />
         </label>
       </div>
