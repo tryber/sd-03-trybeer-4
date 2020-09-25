@@ -42,6 +42,21 @@ export const postUpdateName = async (name, email) => {
       email,
     },
   })
+    .then((resp) => resp.data)
+    .catch(({ err }) => err);
+
+  return response;
+};
+
+export const getProductsFromAPI = async (token) => {
+  const response = await axios({
+    baseURL: `${url}products`,
+    method: 'get',
+    headers: {
+      authorization: token,
+    },
+  })
+    .then((resp) => resp.data)
     .catch(({ err }) => err);
 
   return response;

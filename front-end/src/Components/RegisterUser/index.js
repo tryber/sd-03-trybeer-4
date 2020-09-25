@@ -5,7 +5,7 @@ import validateInput from '../../utils/validate';
 import { postNewUserAPI } from '../../services/api_endpoints';
 import './styles.css';
 
-const beers = require('../../images/beers.png');
+const friends = require('../../images/friends.png');
 
 const RegisterUser = () => {
   const [form, setForm] = useState({
@@ -34,9 +34,13 @@ const RegisterUser = () => {
 
   const createNewUser = async () => {
     const unprocessableEntityCode = 422;
-    const { message, status, user } = await postNewUserAPI(name, email, password, seller);
+    const { message, status, token } = await postNewUserAPI(name, email, password, seller);
     if (status === unprocessableEntityCode) return setError({ message });
-    if (user) return setRedirect({ redirect: true, role: user.role });
+    if (token) {
+      const data = { name, email, token };
+      localStorage.setItem('user', JSON.stringify(data));
+      setRedirect({ redirect: true, role: seller ? 'administrador' : 'client' });
+    }
     return null;
   };
   if (redirect) {
@@ -48,7 +52,7 @@ const RegisterUser = () => {
     <>
       <MenuBar titleName="TryBeer" />
       <section className="register-container default-color shadow">
-        <img src={ beers } alt="Icone de duas cervejas" width="100px" />
+        <img src={ friends } alt="Icone de duas cervejas" width="100px" />
         {error.message && <p>{error.message}</p>}
         <form>
           <label htmlFor="userName">

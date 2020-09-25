@@ -1,21 +1,47 @@
-import React from 'react';
-// import { Link } from 'react-router-dom'; { useState }
-// import getProductsFromAPI from '../../services/api_endpoints';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import BeerCard from '../BeerCard/index';
+import BeerContext from '../../Context/BeerContext/BeerContext';
 import MenuBar from '../MenuBar';
+import './styles.css';
 
-function ProductsPage() {
-  // const [total, setTotal] = useState(0.00);
-
-  // const itemList = getProductsFromAPI;
+const ProductsPage = () => {
+  const initialValue = 0;
+  const { total, products } = useContext(BeerContext);
 
   return (
-    <div>
-      <MenuBar />
-      {/* {itemList.map(({ name, price, url_image }) => (
-         <Card name={name} price={price} image={url_image} />
-      )) } */}
+    <div className="products-list">
+      <MenuBar titleName="TryBeer" />
+      {products.map(({
+        name, price, urlImage, quantity,
+      }, index) => (
+        <BeerCard
+          productName={ name }
+          price={ price }
+          imageURL={ urlImage }
+          initialQuantity={ quantity }
+          index={ index }
+          key={ name }
+        />
+      )) }
+      <Link to="/checkout">
+        <button
+          disabled={ total === initialValue }
+          type="button"
+          data-testid="checkout-bottom-btn"
+          className="checkout-btn"
+        >
+          Ver Carrinho
+          <span data-testid="checkout-bottom-btn-value">
+            {`R$ ${total.toLocaleString('pt-BR', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}`}
+          </span>
+        </button>
+      </Link>
     </div>
   );
-}
+};
 
 export default ProductsPage;
