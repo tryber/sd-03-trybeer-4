@@ -2,11 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const { registerController } = require('./controllers/userController');
-const { loginController } = require('./controllers/userController');
-const { updateNameController } = require('./controllers/userController');
+const {
+  registerController,
+  loginController,
+  updateNameController,
+} = require('./controllers/userController');
 
-const authMiddleware = require('./middlewares/auth');
+const { getAllProducts } = require('./controllers/productController');
+
+// const authMiddleware = require('./middlewares/auth');
 
 const app = express();
 
@@ -18,8 +22,10 @@ app.get('/', (_req, res) => {
   res.send();
 });
 
+app.get('/products', (req, res) => getAllProducts(req, res));
+
 // Rota Get Testando Middleware de Validação do Token JWT
-app.get('/auth', authMiddleware);
+// app.get('/auth', authMiddleware);
 
 app.post('/login', (req, res) => loginController(req, res));
 
