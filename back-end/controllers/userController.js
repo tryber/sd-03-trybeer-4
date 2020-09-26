@@ -8,8 +8,8 @@ const loginController = async (req, res) => {
 };
 
 const registerController = async (req, res) => {
-  const { status, message, user } = await RegisterUser(req.body);
-  if (status === 201) return res.status(status).json({ message, user });
+  const { status, message, token } = await RegisterUser(req.body);
+  if (status === 201) return res.status(status).json({ message, status, token });
   return res.status(status).json({ message, status });
 };
 

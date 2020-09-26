@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MenuAdmin from '../MenuAdmin';
+import AdminSideBar from '../AdminSideBar/index';
 import OrderCard from '../OrderCard';
 import { getOrderList } from '../../services/api_endpoints';
 
@@ -13,9 +14,10 @@ const AdminOrdersPage = () => {
   }, [token]);
 
   return (
-    <>
+    <div className="admin-orders">
       <MenuAdmin />
-      <section>
+      <AdminSideBar />
+      <section className="admin-orders-aside">
       {productList.map(({ id, total_price, delivery_address, delivery_number, status }) => (
         <OrderCard
           id={id}
@@ -26,8 +28,6 @@ const AdminOrdersPage = () => {
         />
       )) }
       </section>
-    </>
+    </div>
   );
 };
-
-export default AdminOrdersPage;

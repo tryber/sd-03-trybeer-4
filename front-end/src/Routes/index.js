@@ -1,12 +1,16 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AdminOrdersPage from '../Components/AdminOrders';
+import BeerProvider from '../Context/BeerContext/BeerProvider';
 import {
   register,
   login,
   clientProfile,
   products,
   orders,
+  adminProfile,
+  adminOrders,
+  adminOrdersDetail,
 } from '../pages';
 
 const Routes = () => (
@@ -19,6 +23,13 @@ const Routes = () => (
       <Route exact path="/admin/orders" component={ AdminOrdersPage } />
       <Route exact path="/products" component={ products } />
       <Route exact path="/orders" component={ orders } />
+      <BeerProvider>
+        <Route exact path="/products" component={ products } />
+        <Route exact path="/orders" component={ orders } />
+        <Route exact path="/admin/orders" component={ adminOrders } />
+        <Route exact path="/admin/orders/:id" component={ adminOrdersDetail } />
+      </BeerProvider>
+      <Route exact path="/admin/profile" component={ adminProfile } />
     </Switch>
   </BrowserRouter>
 );
