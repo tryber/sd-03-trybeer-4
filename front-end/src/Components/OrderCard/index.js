@@ -2,17 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-const OrderCard = ({ id, totalPrice, deliveryNumber, deliveryAddress, status }) => {
-
+const OrderCard = ({
+  id,
+  totalPrice,
+  deliveryNumber,
+  deliveryAddress,
+  status
+}) => {
   return (
     <div className="order">
       <div className="order-info">
         <h2 data-testid={ `${id}-order-number` }>
-          Pedido {id}
+          {`Pedido ${id}`}
         </h2>
         <h3 data-testid={ `${id}-order-address` }>
-          {deliveryAddress}, 
-          {deliveryNumber},
+          {`${deliveryAddress}, ${deliveryNumber}`}
         </h3>
       </div>
       <div className="order-footer">

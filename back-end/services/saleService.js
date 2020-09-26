@@ -6,7 +6,8 @@ const getAllSales = async () => {
   return sales.map(
     ([id, userId, totalPrice, deliveryAddress, deliveryNumber, date, status]) => (
       { id, userId, totalPrice, deliveryAddress, deliveryNumber, date, status }
-    ));
+    )
+  );
 };
 
 module.exports = {
