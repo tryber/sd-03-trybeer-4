@@ -1,6 +1,6 @@
 const connection = require('./connection');
 
-const getSales = async = () => connection()
+const getSales = async () => connection()
   .then((db) => db
     .getTable('sales')
     .select()

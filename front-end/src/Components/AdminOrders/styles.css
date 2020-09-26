@@ -1,7 +1,6 @@
 section {
   border-radius: 5px;
   margin: 100px auto;
-  max-width: 500px;
   padding: 70px 0;
   text-align: center;
   width: 60%;
@@ -37,6 +36,7 @@ input {
 
 .confirm-btn:disabled {
   color: white;
+}
 
 .admin-orders {
   display: flex;

@@ -9,8 +9,7 @@ const {
   updateNameController,
 } = require('./controllers/userController');
 
-
-const authMiddleware = require('./middlewares/auth');
+// const authMiddleware = require('./middlewares/auth');
 const salesController = require('./controllers/salesController');
 const { getAllProducts } = require('./controllers/productController');
 const auth = require('./middlewares/auth');

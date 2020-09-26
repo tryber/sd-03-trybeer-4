@@ -1,6 +1,6 @@
 import React from 'react';
 import { AdminOrders } from '../Components';
 
-const AdminOrdersPage = () => <AdminOrders />;
+const adminOrders = () => <AdminOrders />;
 
-export default AdminOrdersPage;
+export default adminOrders;
