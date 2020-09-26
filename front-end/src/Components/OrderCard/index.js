@@ -7,9 +7,8 @@ const OrderCard = ({
   totalPrice,
   deliveryNumber,
   deliveryAddress,
-  status
-}) => {
-  return (
+  status,
+}) => (
     <div className="order">
       <div className="order-info">
         <h2 data-testid={ `${id}-order-number` }>
@@ -38,7 +37,6 @@ const OrderCard = ({
       </div>
     </div>
   );
-};
 
 OrderCard.propTypes = {
   id: PropTypes.number.isRequired,

@@ -22,16 +22,16 @@ const AdminOrdersPage = () => {
           totalPrice,
           deliveryAddress,
           deliveryNumber,
-          status
+          status,
         }) => (
-          <Link to={`/admin/orders/${ id }`}>
+          <Link to={ `/admin/orders/${id}` }>
             <OrderCard
-              key={ id }
               id={ id }
               totalPrice={ totalPrice }
               deliveryAddress={ deliveryAddress }
               deliveryNumber={ deliveryNumber }
               status={ status }
+              key={ id }
             />
           </Link>
         )) }
