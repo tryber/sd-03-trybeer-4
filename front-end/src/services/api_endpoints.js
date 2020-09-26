@@ -47,12 +47,15 @@ export const postUpdateName = async (name, email) => {
   return response;
 };
 
-export const getOrderList = async () => {
+export const getOrderList = async (token) => {
   const orders = await axios({
-    baseURL: 'http://localhost:3001/profile',
+    baseURL: `${url}admin/orders`,
     method: 'get',
+    headers: {
+      authorization: token,
+    },
   })
+    .then((result) => result.data)
     .catch(({ err }) => err);
-
   return orders;
 };

@@ -7,6 +7,7 @@ const { loginController } = require('./controllers/userController');
 const { updateNameController } = require('./controllers/userController');
 
 const authMiddleware = require('./middlewares/auth');
+const salesController = require('./controllers/salesController');
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.get('/', (_req, res) => {
 
 // Rota Get Testando Middleware de Validação do Token JWT
 app.get('/auth', authMiddleware);
+
+app.get('/admin/orders', salesController.listSales);
 
 app.post('/login', (req, res) => loginController(req, res));
 
