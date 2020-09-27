@@ -1,16 +1,36 @@
-.form {
-  border-radius: 50%;
-  display: inline-grid;
-  font-size: 1em;
+.login-container {
+  border-radius: 5px;
+  margin: 100px auto;
+  max-width: 300px;
+  padding: 70px 0;
+  text-align: center;
+  width: 60%;
 }
 
-.text-box {
-  align-items: center;
-  border: 1px solid black;
-  display: inline-block;
+.form input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #f2f2f2;
+  margin: 8px 0;
 }
 
-.login-btn {
-  background-color: #1CD118;
-  font-size: 1em;
+.default-color {
+  background-color: #0E260A;
+  color: #f2f2f2;
+  font-weight: 700;
+}
+
+.confirm-btn {
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 3px;
+  color: #0E260A;
+  cursor: pointer;
+  font-weight: 700;
+  margin: 5px;
+  padding: 8px;
+}
+
+.confirm-btn:disabled {
+  color: white;
 }
