@@ -1,5 +1,5 @@
 import React from 'react';
-import OrdersDetails from '../Components';
+import { OrdersDetails } from '../Components';
 
 const ordersDetails = () => <OrdersDetails />;
 
