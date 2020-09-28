@@ -7,6 +7,7 @@ import {
   clientProfile,
   products,
   orders,
+  checkout,
   adminProfile,
   adminOrders,
   adminOrdersDetail,
@@ -22,6 +23,7 @@ const Routes = () => (
       <BeerProvider>
         <Route exact path="/products" component={ products } />
         <Route exact path="/orders" component={ orders } />
+        <Route exact path="/checkout" component={ checkout } />
         <Route exact path="/admin/orders" component={ adminOrders } />
         <Route exact path="/admin/orders/:id" component={ adminOrdersDetail } />
       </BeerProvider>
