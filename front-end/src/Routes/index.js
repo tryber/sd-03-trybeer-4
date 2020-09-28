@@ -24,8 +24,8 @@ const Routes = () => (
         <Route exact path="/orders" component={ orders } />
         <Route exact path="/admin/orders" component={ adminOrders } />
         <Route exact path="/admin/orders/:id" component={ adminOrdersDetail } />
+        <Route exact path="/admin/profile" component={ adminProfile } />
       </BeerProvider>
-      <Route exact path="/admin/profile" component={ adminProfile } />
     </Switch>
   </BrowserRouter>
 );
