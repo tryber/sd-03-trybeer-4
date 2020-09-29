@@ -14,16 +14,15 @@ const getSaleItems = async (id) => connection()
     .select()
     .where('sale_id = :id')
     .bind('id', id)
-    .execute()
-  )
+    .execute())
   .then((products) => products.fetchAll())
-  .then((fetched) => fetched.map(elem => (
+  .then((fetched) => fetched.map((elem) => (
     {
       saleId: elem[0],
       productId: elem[1],
-      quantity: elem[2]
+      quantity: elem[2],
     }
-  )))
+  )));
 
 module.exports = {
   getSales,

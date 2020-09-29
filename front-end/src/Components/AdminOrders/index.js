@@ -26,7 +26,7 @@ const AdminOrdersPage = () => {
           deliveryNumber,
           status,
         }) => (
-          <Link key={ id } to={ `/admin/orders/${id}` } totalPrice status >
+          <Link key={ id } to={ `/admin/orders/${id}` } totalPrice status>
             <OrderCard
               id={ id }
               totalPrice={ totalPrice }

@@ -29,13 +29,13 @@ const Routes = () => (
         <Route exact path="/orders" component={ orders } />
         <Route exact path="/admin/orders" component={ adminOrders } />
         <Route
-          exact path="/admin/orders/:id"
-          render={({ match }) =>
-            <AdminOrdersDetail
-              id={Number(match.params.id)}
-              total={(match.params.totalPrice)}
-              status={(match.params.status)}
-            />}
+          exact
+          path="/admin/orders/:id"
+          render={({ match }) => ( <AdminOrdersDetail
+              id={ Number(match.params.id) }
+              total={ (match.params.totalPrice) }
+              status={ (match.params.status) }
+            />)}
         />
       </BeerProvider>
       <Route exact path="/admin/profile" component={ adminProfile } />

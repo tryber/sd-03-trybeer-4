@@ -14,11 +14,9 @@ const getAllSales = async () => {
 const getSaleItems = async (id) => {
   const saleItems = await salesModel.getSaleItems(id);
   return saleItems.length
-  ? { code: 200, saleItems }
-  : { code: 404, message: 'Sale not found' }
-
-}
-
+    ? { code: 200, saleItems }
+    : { code: 404, message: 'Sale not found' };
+};
 
 module.exports = {
   getAllSales,

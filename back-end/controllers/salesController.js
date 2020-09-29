@@ -7,7 +7,7 @@ const listSales = async (_req, res) => {
 
 const saleDetails = async (req, res) => {
   const sales = await getSaleItems(req.params.id);
-  const {code} = sales;
+  const { code } = sales;
   return res.status(code).json(sales);
 };
 
