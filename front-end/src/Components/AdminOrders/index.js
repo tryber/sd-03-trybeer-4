@@ -26,10 +26,13 @@ const AdminOrdersPage = () => {
           deliveryNumber,
           status,
         }, index) => (
-          <Link key={ id } to={{
-            pathname: `/admin/orders/${id}`,
-            saleProps: {id, totalPrice, status}
-            }}>
+          <Link
+            key={ id }
+            to={ {
+              pathname: `/admin/orders/${id}`,
+              saleProps: { id, totalPrice, status },
+            } }
+          >
             <OrderCard
               id={ id }
               totalPrice={ totalPrice }
