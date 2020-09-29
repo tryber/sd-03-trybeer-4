@@ -1,17 +1,50 @@
+.login-page {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
 .login-container {
-  border-radius: 5px;
+  animation: rightBorder 0.5s forwards ease-in-out;
+  animation-play-state: paused;
+  border-radius: 10% 2px;
+  border-right: 0 solid #f2f2f2;
   margin: 100px auto;
   max-width: 300px;
-  padding: 70px 0;
+  padding: 150px 50px;
   text-align: center;
-  width: 60%;
+  width: 50%;
+}
+
+.login-container:hover {
+  animation-play-state: running;
+}
+
+@keyframes rightBorder {
+
+  from {
+    border-right: 0;
+  }
+
+  to {
+    border-right: 60px solid #f2f2f2;
+  }
+}
+
+.login-img {
+
+  width: 500px;
 }
 
 .form input {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #f2f2f2;
+  color: white;
   margin: 8px 0;
+  width: 100%;
 }
 
 .default-color {

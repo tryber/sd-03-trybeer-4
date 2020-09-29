@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import validateInput from '../../utils/validate';
 import { getUserFromAPI } from '../../services/api_endpoints';
 import Header from '../Header/index';
+import Footer from '../Footer/index';
 import './login.css';
 import '../../index.css';
 
@@ -80,6 +81,7 @@ function LoginPage() {
           </Link>
         </div>
       </section>
+      <Footer />
     </>
   );
 }
