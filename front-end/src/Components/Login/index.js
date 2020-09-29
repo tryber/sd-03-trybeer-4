@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import validateInput from '../../utils/validate';
 import { getUserFromAPI } from '../../services/api_endpoints';
-import Header from '../Header/index';
-import Footer from '../Footer/index';
+import Header from '../Header';
+import Footer from '../Footer';
 import './login.css';
 import '../../index.css';
 

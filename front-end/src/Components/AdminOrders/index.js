@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminSideBar from '../AdminSideBar/index';
+import AdminSideBar from '../AdminSideBar';
 import './styles.css';
 
 const AdminOrders = () => (

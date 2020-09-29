@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import MenuBar from '../MenuBar/index';
+import MenuBar from '../MenuBar';
 import { getProductsLocalStorage } from '../../utils/localStorage';
 import './styles.css';
-import Footer from '../Footer/index';
+import Footer from '../Footer';
 
 const mockOrders = [
   {

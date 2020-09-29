@@ -15,7 +15,7 @@ const Footer = () => (
       <p>ReactJs</p>
       <p>NodeJs</p>
       <p>Express</p>
-      <p>MongoDb</p>
+      <p>MySQL</p>
     </div>
     <div>
       <h4>Links úteis</h4>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { postUpdateName } from '../../services/api_endpoints';
-import MenuBar from '../MenuBar/index';
-import Footer from '../Footer/index';
-import Promocional from '../Promocional/index';
+import MenuBar from '../MenuBar';
+import Footer from '../Footer';
+import Promocional from '../Promocional';
 import './styles.css';
 
 const ClientProfile = () => {
