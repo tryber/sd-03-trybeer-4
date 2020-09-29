@@ -5,13 +5,13 @@ import MenuBar from '../MenuBar/index';
 import './styles.css';
 
 const ClientProfile = () => {
-  const { name, email } = JSON.parse(localStorage.getItem('user')) || '';
+  const { name, email, token } = JSON.parse(localStorage.getItem('user')) || '';
   const [userEmail] = useState(email);
   const [newName, setNewName] = useState(name);
   const [message, setMessage] = useState(null);
 
   const handleChangeName = async () => {
-    const { data } = await postUpdateName(newName, email);
+    const data = await postUpdateName(newName, email, token);
     if (data.token) { localStorage.setItem('user', JSON.stringify(data)); setMessage(data.message); }
     return setMessage(data.message);
   };
