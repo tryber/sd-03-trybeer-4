@@ -9,34 +9,34 @@ const OrderCard = ({
   deliveryAddress,
   status,
 }) => (
-    <div className="order">
-      <div className="order-info">
-        <h2 data-testid={ `${id}-order-number` }>
-          {`Pedido ${id}`}
-        </h2>
-        <h3 data-testid={ `${id}-order-address` }>
-          {`${deliveryAddress}, ${deliveryNumber}`}
-        </h3>
-      </div>
-      <div className="order-footer">
-        <span
-          data-testid={ `${id}-order-total-value` }
-          className="order-total"
-        >
-          R$
-          { `${totalPrice.toLocaleString('pt-BR', {
-            minimumFractionDigits: 2,
-          })}` }
-        </span>
-        <span
-          data-testid={ `${id}-order-status` }
-          className={ status === 'Entregue' ? 'order-delivered' : 'order-pending' }
-        >
-          {status}
-        </span>
-      </div>
+  <div className="order">
+    <div className="order-info">
+      <h2 data-testid={ `${id}-order-number` }>
+        {`Pedido ${id}`}
+      </h2>
+      <h3 data-testid={ `${id}-order-address` }>
+        {`${deliveryAddress}, ${deliveryNumber}`}
+      </h3>
     </div>
-  );
+    <div className="order-footer">
+      <span
+        data-testid={ `${id}-order-total-value` }
+        className="order-total"
+      >
+        R$
+        { `${totalPrice.toLocaleString('pt-BR', {
+          minimumFractionDigits: 2,
+        })}` }
+      </span>
+      <span
+        data-testid={ `${id}-order-status` }
+        className={ status === 'Entregue' ? 'order-delivered' : 'order-pending' }
+      >
+        {status}
+      </span>
+    </div>
+  </div>
+);
 
 OrderCard.propTypes = {
   id: PropTypes.number.isRequired,

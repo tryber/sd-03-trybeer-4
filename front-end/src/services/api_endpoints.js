@@ -74,3 +74,14 @@ export const getOrderList = async (token) => {
     .catch(({ err }) => err);
   return orders;
 };
+
+export const getItemsFromOrder = async (id) => {
+  const {saleItems} = await axios({
+    baseURL: `${url}admin/orders/${id}`,
+    method: 'get',
+  })
+    .then((result) => result.data)
+    .catch(({ err }) => err);
+
+    return saleItems;
+};
