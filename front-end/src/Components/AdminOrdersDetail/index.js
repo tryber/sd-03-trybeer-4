@@ -26,8 +26,11 @@ const AdminOrdersDetail = (props) => {
           {saleItems.map(({ productId, quantity }) => (
             <li key={ productId }>{`${quantity} - ${productId}`}</li>))}
         </ul>
-          <h2 data-testid="order-total-value">Total: {totalPrice}</h2>
-        <button type="button"data-testid="mark-as-delivered-btn">Marcar como entregue</button>
+        <h2 data-testid="order-total-value">
+          Total:
+          {totalPrice}
+        </h2>
+        <button type="button" data-testid="mark-as-delivered-btn">Marcar como entregue</button>
       </div>
     </div>
   );

@@ -45,6 +45,7 @@ OrderCard.propTypes = {
   deliveryNumber: PropTypes.number.isRequired,
   deliveryAddress: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
+  dtttId: PropTypes.number.isRequired,
 };
 
 export default OrderCard;
