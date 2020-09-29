@@ -25,14 +25,19 @@ const AdminOrdersPage = () => {
           deliveryAddress,
           deliveryNumber,
           status,
-        }) => (
-          <Link key={ id } to={ `/admin/orders/${id}` } totalPrice status>
+        }, index) => (
+          <Link key={ id } to={{
+            pathname: `/admin/orders/${id}`,
+            saleProps: {id, totalPrice, status}
+            }}>
             <OrderCard
               id={ id }
               totalPrice={ totalPrice }
               deliveryAddress={ deliveryAddress }
               deliveryNumber={ deliveryNumber }
               status={ status }
+              dtttId={ index }
+              // Data-test-ids devem iniciar em zero
             />
           </Link>
         )) }

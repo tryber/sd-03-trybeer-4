@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { AdminOrdersDetail } from '../Components';
 import AdminOrdersPage from '../Components/AdminOrders';
 import BeerProvider from '../Context/BeerContext/BeerProvider';
 import {
@@ -10,8 +9,7 @@ import {
   products,
   orders,
   adminProfile,
-  adminOrders,
-  // adminOrdersDetail,
+  adminOrders, adminOrdersDetail
 } from '../pages';
 
 const Routes = () => (
@@ -28,16 +26,7 @@ const Routes = () => (
         <Route exact path="/products" component={ products } />
         <Route exact path="/orders" component={ orders } />
         <Route exact path="/admin/orders" component={ adminOrders } />
-        <Route
-          exact
-          path="/admin/orders/:id"
-          render={({ match }) => ( <AdminOrdersDetail
-              id={ Number(match.params.id) }
-              total={ (match.params.totalPrice) }
-              status={ (match.params.status) }
-            />)}
-        />
-        <Route exact path="/admin/orders/:id" component={ adminOrdersDetail } />
+        <Route exact path="/admin/orders/:id" component= {adminOrdersDetail} />
         <Route exact path="/admin/profile" component={ adminProfile } />
       </BeerProvider>
     </Switch>

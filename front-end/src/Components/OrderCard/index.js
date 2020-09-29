@@ -8,19 +8,20 @@ const OrderCard = ({
   deliveryNumber,
   deliveryAddress,
   status,
+  dtttId,
 }) => (
   <div className="order">
     <div className="order-info">
-      <h2 data-testid={ `${id}-order-number` }>
+      <h2 data-testid={ `${dtttId}-order-number` }>
         {`Pedido ${id}`}
       </h2>
-      <h3 data-testid={ `${id}-order-address` }>
+      <h3 data-testid={ `${dtttId}-order-address` }>
         {`${deliveryAddress}, ${deliveryNumber}`}
       </h3>
     </div>
     <div className="order-footer">
       <span
-        data-testid={ `${id}-order-total-value` }
+        data-testid={ `${dtttId}-order-total-value` }
         className="order-total"
       >
         R$
@@ -29,7 +30,7 @@ const OrderCard = ({
         })}` }
       </span>
       <span
-        data-testid={ `${id}-order-status` }
+        data-testid={ `${dtttId}-order-status` }
         className={ status === 'Entregue' ? 'order-delivered' : 'order-pending' }
       >
         {status}
