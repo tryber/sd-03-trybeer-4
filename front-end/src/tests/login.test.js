@@ -30,7 +30,7 @@ describe('Test login page', () => {
     });
   });
 
-  test('Login button should do a request to database and return a json', () => {
+  test('Login button should do a request to database and return a json', async () => {
     const { getByTestId } = render(<App />);
     const loginButton = getByTestId('signin-btn');
     const email = 'user@email.com';
@@ -38,11 +38,8 @@ describe('Test login page', () => {
     const emailInput = getByTestId('email-input');
     const passwordInput = getByTestId('password-input');
     expect(loginButton).toHaveAttribute('disabled');
-    act(() => {
-      fireEvent.input(emailInput, { target: { value: email } });
-      fireEvent.input(passwordInput, { target: { value: password } });
-      expect(loginButton).toBeVisible();
-      // fireEvent.click(loginButton);
-    });
+    fireEvent.input(emailInput, { target: { value: email } });
+    fireEvent.input(passwordInput, { target: { value: password } });
+    expect(loginButton).toBeVisible();
   });
 });
