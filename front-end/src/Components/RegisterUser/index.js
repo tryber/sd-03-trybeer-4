@@ -58,6 +58,7 @@ const RegisterUser = () => {
           <label htmlFor="userName">
             Nome
             <input
+              className="input-register"
               onChange={ (e) => handleInput(e) }
               type="text"
               name="name"
@@ -69,6 +70,7 @@ const RegisterUser = () => {
           <label htmlFor="userEmail">
             Email
             <input
+              className="input-register"
               onChange={ (e) => handleInput(e) }
               type="email"
               name="email"
@@ -80,6 +82,7 @@ const RegisterUser = () => {
           <label htmlFor="userPassword">
             Password
             <input
+              className="input-register"
               onChange={ (e) => handleInput(e) }
               type="password"
               name="password"
