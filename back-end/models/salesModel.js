@@ -1,4 +1,4 @@
-const connection = require('./connection');
+const { queryConnection, connection } = require('./connection');
 
 const getSales = async () => connection()
   .then((db) => db
@@ -7,6 +7,24 @@ const getSales = async () => connection()
     .execute())
   .then((orders) => orders.fetchAll())
   .catch((error) => error);
+
+const getSaleById = async (id) => connection()
+  .then((db) => db
+    .getTable('sales')
+    .select()
+    .where('id = :id')
+    .bind('id', id)
+    .execute())
+  .then((sale) => sale.fetchOne())
+  .then(([ saleId, userId, total, address, number, date, status]) => ({
+    saleId,
+    userId,
+    total,
+    address,
+    number,
+    date,
+    status,
+  }))
 
 const getSaleItems = async (id) => connection()
   .then((db) => db
@@ -24,7 +42,37 @@ const getSaleItems = async (id) => connection()
     }
   )));
 
+const finishSale = async (id) => connection()
+  .then((db) => db
+    .getTable('sales')
+    .update()
+    .set('status', 'entregue')
+    .where('id = :id')
+    .bind('id', id)
+    .execute())
+
+const getSaleItemsV2 = async (id) => {
+  const query = `SELECT s.sale_id, s.quantity, p.name, p.price
+    FROM Trybeer.sales_products as s
+    JOIN Trybeer.products AS p WHERE s.product_id = p.id
+    AND s.sale_id = ${id}`;
+
+  return await queryConnection(query)
+    .then((items) => items.fetchAll())
+    .then((fetched) => fetched.map((elem) => (
+      {
+        saleId: elem[0],
+        quantity: elem[1],
+        productName: elem[2],
+        unitPrice: elem[3],
+      }
+    )))
+};
+
 module.exports = {
   getSales,
+  getSaleById,
   getSaleItems,
+  getSaleItemsV2,
+  finishSale
 };

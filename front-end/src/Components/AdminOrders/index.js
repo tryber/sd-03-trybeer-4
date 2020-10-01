@@ -28,10 +28,7 @@ const AdminOrdersPage = () => {
         }, index) => (
           <Link
             key={ id }
-            to={ {
-              pathname: `/admin/orders/${id}`,
-              saleProps: { id, totalPrice, status },
-            } }
+            to={ `/admin/orders/${id}` }
           >
             <OrderCard
               id={ id }

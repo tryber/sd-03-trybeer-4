@@ -78,12 +78,19 @@ export const getOrderList = async (token) => {
   return orders;
 };
 
-export const getItemsFromOrder = async (id) => {
-  const { saleItems } = await axios({
+export const getOrderData = async (id) => {
+  const { saleItems, saleInfo } = await axios({
     baseURL: `${url}admin/orders/${id}`,
     method: 'get',
   })
     .then((result) => result.data)
     .catch(({ err }) => err);
-  return saleItems;
+  return { saleItems, saleInfo };
+};
+
+export const markOrderAsDelivered = async (id) => {
+  await axios({
+    baseURL: `${url}admin/orders/${id}`,
+    method: 'post',
+  });
 };

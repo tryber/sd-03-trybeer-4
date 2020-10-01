@@ -1,4 +1,4 @@
-const { getAllSales, getSaleItems } = require('../services/saleService');
+const { getAllSales, getSaleInfo } = require('../services/saleService');
 
 const listSales = async (_req, res) => {
   const sales = await getAllSales();
@@ -6,7 +6,7 @@ const listSales = async (_req, res) => {
 };
 
 const saleDetails = async (req, res) => {
-  const sales = await getSaleItems(req.params.id);
+  const sales = await getSaleInfo(req.params.id);
   const { code } = sales;
   return res.status(code).json(sales);
 };
