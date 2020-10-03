@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import MenuBar from '../MenuBar';
 import { getProductsLocalStorage } from '../../utils/localStorage';
+import { postNewOrder } from '../../services/api_endpoints';
 import './styles.css';
 
 const Checkout = () => {
+  const user = getProductsLocalStorage('user');
   const [cart, setCart] = useState([]);
   const [newCart, setNewCart] = useState([]);
-  const [nameAdress, setNameAdress] = useState(null);
-  const [numberAdress, setNumberAdress] = useState(null);
+  const [nameAdress, setNameAdress] = useState('');
+  const [numberAdress, setNumberAdress] = useState('');
+  const [message, setMessage] = useState(null);
   const zero = 0;
 
   const calculePrice = (param, paramZero) => param
@@ -25,7 +28,7 @@ const Checkout = () => {
     if (price <= zero) return true;
     if (!name || !number) return true;
     return false;
-  }
+  };
 
   const removeOrder = (index) => {
     cart.splice(index, 1);
@@ -33,13 +36,17 @@ const Checkout = () => {
     localStorage.setItem('cart', JSON.stringify(cart));
   };
 
+  const sendNewOrder = async (name, number, productCart, userParam, price) => {
+    setNameAdress('');
+    setNumberAdress('');
+    const response = await postNewOrder(name, number, productCart, userParam, price);
+    return setMessage(response.data.message);
+  };
+
   useEffect(() => {
     setCart(getProductsLocalStorage('cart'));
   }, [newCart]);
 
-  // console.log('Name', nameAdress);
-  // console.log('Number', numberAdress);
-  // console.log('Total Price', justNumberPrice);
   return (
     <div>
       <MenuBar titleName="Finalizar Pedido" />
@@ -81,7 +88,7 @@ const Checkout = () => {
           type="text"
           required
           onChange={ (e) => setNameAdress(e.target.value) }
-          // value={ newName }
+          value={ nameAdress }
         />
       </label>
       <br />
@@ -94,7 +101,7 @@ const Checkout = () => {
           type="text"
           required
           onChange={ (e) => setNumberAdress(e.target.value) }
-          // value={ newName }
+          value={ numberAdress }
         />
       </label>
       <br />
@@ -102,10 +109,11 @@ const Checkout = () => {
         type="button"
         data-testid="checkout-finish-btn"
         disabled={ disableButtton(justNumberPrice, nameAdress, numberAdress) }
-        // onClick={ () => handleChangeName(name, email) }
+        onClick={ () => sendNewOrder(nameAdress, numberAdress, cart, user, justNumberPrice) }
       >
         Finalizar Pedido
       </button>
+      { message && <p>{message}</p> }
     </div>
   );
 };

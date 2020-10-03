@@ -61,3 +61,20 @@ export const getProductsFromAPI = async (token) => {
 
   return response;
 };
+
+export const postNewOrder = async (nameAdress, numberAdress, cart, user, justNumberPrice) => {
+  const response = await axios({
+    baseURL: `${url}orders`,
+    method: 'post',
+    data: {
+      nameAdress,
+      numberAdress,
+      cart,
+      user,
+      justNumberPrice,
+    },
+  })
+    .catch(({ err }) => err);
+
+  return response;
+};
