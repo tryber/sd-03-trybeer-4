@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import MenuBar from '../MenuBar';
 import { getProductsLocalStorage } from '../../utils/localStorage';
 import { postNewOrder } from '../../services/api_endpoints';
 import './styles.css';
 
 const Checkout = () => {
+  const history = useHistory();
   const user = getProductsLocalStorage('user');
   const [cart, setCart] = useState([]);
   const [newCart, setNewCart] = useState([]);
@@ -12,6 +14,7 @@ const Checkout = () => {
   const [numberAdress, setNumberAdress] = useState('');
   const [message, setMessage] = useState(null);
   const zero = 0;
+  const seconds = 3000;
 
   const calculePrice = (param, paramZero) => param
     .reduce((acc, { price, quantity }) => acc + (price * quantity), paramZero);
@@ -42,6 +45,12 @@ const Checkout = () => {
     const response = await postNewOrder(name, number, productCart, userParam, price);
     return setMessage(response.data.message);
   };
+
+  function goToProducts() {
+    setTimeout(() => {
+      history.push('/products');
+    }, seconds);
+  }
 
   useEffect(() => {
     setCart(getProductsLocalStorage('cart'));
@@ -114,6 +123,7 @@ const Checkout = () => {
         Finalizar Pedido
       </button>
       { message && <p>{message}</p> }
+      { message && goToProducts() }
     </div>
   );
 };
