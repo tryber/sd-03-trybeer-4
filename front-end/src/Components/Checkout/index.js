@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import MenuBar from '../MenuBar';
 import { getProductsLocalStorage } from '../../utils/localStorage';
 import { postNewOrder } from '../../services/api_endpoints';
