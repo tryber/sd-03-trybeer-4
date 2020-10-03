@@ -28,6 +28,7 @@ app.get('/products', auth(true), (req, res) => getAllProducts(req, res));
 
 app.get('/admin/orders', salesController.listSales);
 app.get('/admin/orders/:id', salesController.saleDetails);
+app.post('/admin/orders/:id', salesController.finishSale);
 
 app.post('/login', (req, res) => loginController(req, res));
 

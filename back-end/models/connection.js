@@ -26,17 +26,16 @@ const connection = async () => (
         process.exit(1);
       }));
 
-// Connection dedicado exclusivamente à query usada para juntar 2 tabelas.
-// Sugestão de @Hfreitas dadas as limitações do driver MySQL para Node.
+// Connection dedicado exclusivamente à query usada para juntar 2 tabelas
+// É necessário conectar ao banco cada vez que for fazer uma requisição
+// Sugestão de @Hfreitas dadas as limitações do driver MySQL para Node
 const queryConnection = async (query) => (
-  joinSchema
-    ? Promise.resolve(joinSchema)
-    : mysqlx
-      .getSession(config)
-      .then(async (session) => {
-        joinSchema = await session.sql(query).execute()
-        return joinSchema;
-      })
+  mysqlx
+    .getSession(config)
+    .then(async (session) => {
+      joinSchema = await session.sql(query).execute()
+      return joinSchema;
+    })
 );
 
 module.exports = { connection, queryConnection };

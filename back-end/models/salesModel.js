@@ -26,21 +26,23 @@ const getSaleById = async (id) => connection()
     status,
   }))
 
-const getSaleItems = async (id) => connection()
-  .then((db) => db
-    .getTable('sales_products')
-    .select()
-    .where('sale_id = :id')
-    .bind('id', id)
-    .execute())
-  .then((products) => products.fetchAll())
+const getSaleItems = async (id) => {
+  const query = `SELECT s.sale_id, s.quantity, p.name, p.price
+  FROM Trybeer.sales_products as s
+  JOIN Trybeer.products AS p WHERE s.product_id = p.id
+  AND s.sale_id = ${id}`;
+
+  return await queryConnection(query)
+  .then((items) => items.fetchAll())
   .then((fetched) => fetched.map((elem) => (
     {
       saleId: elem[0],
-      productId: elem[1],
-      quantity: elem[2],
+      quantity: elem[1],
+      productName: elem[2],
+      unitPrice: elem[3],
     }
-  )));
+    )))
+  };
 
 const finishSale = async (id) => connection()
   .then((db) => db
@@ -50,29 +52,10 @@ const finishSale = async (id) => connection()
     .where('id = :id')
     .bind('id', id)
     .execute())
-
-const getSaleItemsV2 = async (id) => {
-  const query = `SELECT s.sale_id, s.quantity, p.name, p.price
-    FROM Trybeer.sales_products as s
-    JOIN Trybeer.products AS p WHERE s.product_id = p.id
-    AND s.sale_id = ${id}`;
-
-  return await queryConnection(query)
-    .then((items) => items.fetchAll())
-    .then((fetched) => fetched.map((elem) => (
-      {
-        saleId: elem[0],
-        quantity: elem[1],
-        productName: elem[2],
-        unitPrice: elem[3],
-      }
-    )))
-};
-
+    
 module.exports = {
   getSales,
   getSaleById,
   getSaleItems,
-  getSaleItemsV2,
-  finishSale
+  finishSale,
 };

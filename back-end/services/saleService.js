@@ -1,5 +1,5 @@
 const salesModel = require('../models/salesModel');
-const { getSales, getSaleById, getSaleItems, getSaleItemsV2 } = require('../models/salesModel');
+const { getSales, getSaleById, getSaleItems } = require('../models/salesModel');
 
 const getAllSales = async () => {
   const sales = await getSales();
@@ -13,7 +13,7 @@ const getAllSales = async () => {
 
 const getSaleInfo = async (id) => {
   const saleInfo = await getSaleById(id);
-  const saleItems = await getSaleItemsV2(id);
+  const saleItems = await getSaleItems(id);
   return saleItems.length
     ? { code: 200, saleItems, saleInfo }
     : { code: 404, message: 'Sale not found' };
