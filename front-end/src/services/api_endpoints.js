@@ -33,10 +33,13 @@ export const postNewUserAPI = async (name, email, password, seller) => {
   return dataResponse;
 };
 
-export const postUpdateName = async (name, email) => {
+export const postUpdateName = async (name, email, token) => {
   const response = await axios({
     baseURL: `${url}profile`,
     method: 'post',
+    headers: {
+      authorization: token,
+    },
     data: {
       name,
       email,

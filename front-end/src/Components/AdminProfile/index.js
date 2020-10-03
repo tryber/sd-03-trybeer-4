@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import AdminSideBar from '../AdminSideBar/index';
+import AdminSideBar from '../AdminSideBar';
 import './styles.css';
 
 const AdminProfile = () => {
