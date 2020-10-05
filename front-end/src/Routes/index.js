@@ -9,6 +9,8 @@ import {
   clientProfile,
   products,
   orders,
+  ordersDetails,
+  checkout,
   adminProfile,
   adminOrders,
 } from '../pages';
@@ -26,6 +28,8 @@ const Routes = () => (
       <BeerProvider>
         <Route exact path="/products" component={ products } />
         <Route exact path="/orders" component={ orders } />
+        <Route exact path="/orders/:id" component={ ordersDetails } />
+        <Route exact path="/checkout" component={ checkout } />
         <Route exact path="/admin/orders" component={ adminOrders } />
         <Route
           exact

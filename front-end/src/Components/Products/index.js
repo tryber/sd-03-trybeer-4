@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import BeerCard from '../BeerCard/index';
+import BeerCard from '../BeerCard';
 import BeerContext from '../../Context/BeerContext/BeerContext';
 import MenuBar from '../MenuBar';
 import './styles.css';
@@ -13,9 +13,10 @@ const ProductsPage = () => {
     <div className="products-list">
       <MenuBar titleName="TryBeer" />
       {products.map(({
-        name, price, urlImage, quantity,
+        id, name, price, urlImage, quantity,
       }, index) => (
         <BeerCard
+          id={ id }
           productName={ name }
           price={ price }
           imageURL={ urlImage }

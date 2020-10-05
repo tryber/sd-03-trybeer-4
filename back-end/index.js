@@ -12,6 +12,7 @@ const {
 // const authMiddleware = require('./middlewares/auth');
 const salesController = require('./controllers/salesController');
 const { getAllProducts } = require('./controllers/productController');
+const { createSale } = require('./controllers/saleController');
 const auth = require('./middlewares/auth');
 const errorHandler = require('./middlewares/errorHandler');
 
@@ -35,6 +36,8 @@ app.post('/login', (req, res) => loginController(req, res));
 app.post('/register', (req, res) => registerController(req, res));
 
 app.post('/profile', (req, res) => updateNameController(req, res));
+
+app.post('/orders', (req, res) => createSale(req, res));
 
 app.use(errorHandler);
 

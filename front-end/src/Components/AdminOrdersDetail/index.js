@@ -83,7 +83,6 @@ const AdminOrdersDetail = ({ id }) => {
 
 AdminOrdersDetail.propTypes = {
   id: PropTypes.number.isRequired,
-  // status: PropTypes.string.isRequired,
 };
 
 export default AdminOrdersDetail;
