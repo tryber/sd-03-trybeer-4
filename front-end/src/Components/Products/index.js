@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import BeerCard from '../BeerCard/index';
+import BeerCard from '../BeerCard';
 import BeerContext from '../../Context/BeerContext/BeerContext';
 import MenuBar from '../MenuBar';
 import './styles.css';

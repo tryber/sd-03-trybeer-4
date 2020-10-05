@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import validateInput from '../../utils/validate';
 import { getUserFromAPI } from '../../services/api_endpoints';
+import Header from '../Header';
+import Footer from '../Footer';
 import './login.css';
+import '../../index.css';
 
 function LoginPage() {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -30,50 +33,56 @@ function LoginPage() {
   if (userRole === 'client') return <Redirect to="/products" />;
 
   return (
-    <div className="form">
-      <label htmlFor="email">
-        Email
-        <input
-          id="email"
-          className="text-box"
-          name="email"
-          data-testid="email-input"
-          onChange={ (event) => handleInput(event) }
-          type="email"
-          required
-        />
-      </label>
-      <label htmlFor="password">
-        Password
-        <input
-          id="password"
-          className="text-box"
-          data-testid="password-input"
-          onChange={ (event) => handleInput(event) }
-          name="password"
-          required
-          type="password"
-        />
-      </label>
-      <button
-        className="login-btn"
-        disabled={ email === '' || password === '' }
-        type="button"
-        data-testid="signin-btn"
-        onClick={ () => getUserData(email, password) }
-      >
-        ENTRAR
-      </button>
-      <Link to="./register">
-        <button
-          className="register-btn"
-          type="button"
-          data-testid="no-account-btn"
-        >
-          Ainda não tenho conta
-        </button>
-      </Link>
-    </div>
+    <>
+      <Header title="Tente Cerveja" />
+      <section className="login-container default-color box-shadow">
+        <div className="form">
+          <label htmlFor="email">
+            Email
+            <input
+              id="email"
+              className="text-box"
+              name="email"
+              data-testid="email-input"
+              onChange={ (event) => handleInput(event) }
+              type="email"
+              required
+            />
+          </label>
+          <label htmlFor="password">
+            Password
+            <input
+              id="password"
+              className="text-box"
+              data-testid="password-input"
+              onChange={ (event) => handleInput(event) }
+              name="password"
+              required
+              type="password"
+            />
+          </label>
+          <button
+            className="login-btn confirm-btn"
+            disabled={ email === '' || password === '' }
+            type="button"
+            data-testid="signin-btn"
+            onClick={ () => getUserData(email, password) }
+          >
+            ENTRAR
+          </button>
+          <Link to="./register">
+            <button
+              className="register-btn confirm-btn"
+              type="button"
+              data-testid="no-account-btn"
+            >
+              Ainda não tenho conta
+            </button>
+          </Link>
+        </div>
+      </section>
+      <Footer />
+    </>
   );
 }
 
