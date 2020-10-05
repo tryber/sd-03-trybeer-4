@@ -1,7 +1,5 @@
 const { getAllSales, getSaleInfo, finishSale } = require('../services/saleService');
 
-const feedback = (message) => { message; };
-
 const listSales = async (_req, res) => {
   const sales = await getAllSales();
   return res.status(200).json(sales);
@@ -19,15 +17,15 @@ const setAsDelivered = async (req, res) => {
 
   switch (true) {
     case !saleInfo:
-      return res.status(404).json(feedback('Order not found'));
+      return res.status(404).json({ message: 'Order not found' });
     case saleInfo.status === 'Entregue':
-      return res.status(304).json(feedback('Order was already delivered'));
+      return res.status(304).json({ message: 'Order was already delivered' });
     case saleInfo.status === 'Pendente':
       return finishSale(id).then(() => res.status(200));
     default:
-      return res.status(400).json(feedback('Sorry. Try again!'));
+      return res.status(400).json({ message: 'Sorry. Try again!' });
   }
-}
+};
 
 module.exports = {
   listSales,
