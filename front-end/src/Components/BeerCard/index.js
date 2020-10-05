@@ -120,6 +120,7 @@ const BeerCard = ({
 };
 
 BeerCard.propTypes = {
+  id: PropTypes.number.isRequired,
   imageURL: PropTypes.string.isRequired,
   productName: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
