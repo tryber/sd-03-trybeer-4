@@ -11,6 +11,7 @@ import {
 } from '../../utils/localStorage';
 
 const BeerCard = ({
+  id,
   productName,
   price,
   imageURL,
@@ -32,6 +33,7 @@ const BeerCard = ({
       const calculateQuantity = currentValue + sumValue;
       if (calculateQuantity >= 1) {
         addProductToLocalStorage({
+          id,
           productName,
           price,
           imageURL,
@@ -42,7 +44,7 @@ const BeerCard = ({
       updateProductInLocalStorage(productName, zero);
       return zero;
     });
-  }, [imageURL, price, productName, setTotal]);
+  }, [id, imageURL, price, productName, setTotal]);
 
   useEffect(() => {
     const saveProducts = getProductsLocalStorage('cart');

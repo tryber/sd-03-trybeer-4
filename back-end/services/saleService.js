@@ -13,8 +13,8 @@ const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
   // Para cada Produto do Carrinho, cria-se um registro do produto na tabela sales_products
   // passando Id da Venda + Id Produto + Quantidade
   cart.forEach(async (productCart) => {
-    const { quantity } = productCart;
-    await Model.registerSaleProduct(sale, quantity, quantity);
+    const { id: prodId, quantity } = productCart;
+    await Model.registerSaleProduct(sale, prodId, quantity);
   });
 
   return { message: 'Compra realizada com sucesso!' };
