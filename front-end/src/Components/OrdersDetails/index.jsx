@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 // import { getOrdersFromAPI } from '../../services/api_endpoints';
 import MenuBar from '../MenuBar';
 
@@ -31,12 +31,13 @@ const OrdersDetails = () => {
   // const { id } = useParams();
   const { token } = JSON.parse(localStorage.getItem('user')) || '';
 
-  // useEffect(() => {
-  //   const getData = async (id) => {
-  //     setOrders(await getOrdersFromAPI(id))
-  //   }
-  //   getData(id);
-  // }, [id]);
+  useEffect(() => {
+    setOrders(mock);
+    // const getData = async (id) => {
+    //   setOrders(await getOrdersFromAPI(id))
+    // }
+    // getData(id);
+  }, []);
 
   if (!token) return <Redirect to="/login"/>
 
