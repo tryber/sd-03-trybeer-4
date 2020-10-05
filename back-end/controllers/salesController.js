@@ -15,7 +15,7 @@ const saleDetails = async (req, res) => {
 
 const setAsDelivered = async (req, res) => {
   const { id } = req.params;
-  const { saleInfo } = await getSaleInfo(id);
+  const { saleInfo } = await getSaleInfo(id) || [];
 
   switch (true) {
     case !saleInfo:
@@ -23,12 +23,11 @@ const setAsDelivered = async (req, res) => {
     case saleInfo.status === 'Entregue':
       return res.status(304).json(feedback('Order was already delivered'));
     case saleInfo.status === 'Pendente':
-      finishSale(id).then;
-      return res.status(200);
+      return finishSale(id).then(() => res.status(200));
     default:
       return res.status(400).json(feedback('Sorry. Try again!'));
   }
-};
+}
 
 module.exports = {
   listSales,

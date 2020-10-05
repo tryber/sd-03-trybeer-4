@@ -21,7 +21,7 @@ const getSaleInfo = async (id) => {
     : { code: 404, message: 'Sale not found' };
 };
 
-const finishSale = async (id) => await salesModel.finishSale(id);
+const finishSale = async (id) => salesModel.finishSale(id);
 
 const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
   // moment.locale('pt-BR');
