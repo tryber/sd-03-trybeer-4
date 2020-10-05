@@ -5,13 +5,13 @@ const { getSales, getSaleById, getSaleItems } = require('../models/salesModel');
 
 const getAllSales = async () => {
   const sales = await getSales();
-  
+
   return sales.map(
     ([id, userId, totalPrice, deliveryAddress, deliveryNumber, date, status]) => (
       { id, userId, totalPrice, deliveryAddress, deliveryNumber, date, status }
-      ),
-      );
-    };
+    ),
+  );
+};
 
 const getSaleInfo = async (id) => {
   const saleInfo = await getSaleById(id);
@@ -21,9 +21,7 @@ const getSaleInfo = async (id) => {
     : { code: 404, message: 'Sale not found' };
 };
 
-const finishSale = async (id) => {
-  return await salesModel.finishSale(id);
-};
+const finishSale = async (id) => await salesModel.finishSale(id);
 
 const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
   // moment.locale('pt-BR');
@@ -49,3 +47,4 @@ module.exports = {
   getSaleInfo,
   finishSale,
   createSale,
+};

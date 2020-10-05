@@ -93,10 +93,6 @@ export const markOrderAsDelivered = async (id) => {
     baseURL: `${url}admin/orders/${id}`,
     method: 'post',
   });
-    .then((res) => res.data)
-    .catch(({ err }) => err);
-
-  return response;
 };
 
 export const postNewOrder = async (nameAdress, numberAdress, cart, user, justNumberPrice) => {
@@ -111,7 +107,7 @@ export const postNewOrder = async (nameAdress, numberAdress, cart, user, justNum
       justNumberPrice,
     },
   })
-    .catch(({ err }) => err);
-
+  .catch(({ err }) => err);
+  
   return response;
 };

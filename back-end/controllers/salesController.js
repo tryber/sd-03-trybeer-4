@@ -1,6 +1,6 @@
 const { getAllSales, getSaleInfo, finishSale } = require('../services/saleService');
 
-const feedback = (message) => { message };
+const feedback = (message) => { message; };
 
 const listSales = async (_req, res) => {
   const sales = await getAllSales();
@@ -28,7 +28,7 @@ const setAsDelivered = async (req, res) => {
     default:
       return res.status(400).json(feedback('Sorry. Try again!'));
   }
-}
+};
 
 module.exports = {
   listSales,

@@ -33,7 +33,7 @@ const queryConnection = async (query) => (
   mysqlx
     .getSession(config)
     .then(async (session) => {
-      joinSchema = await session.sql(query).execute()
+      joinSchema = await session.sql(query).execute();
       return joinSchema;
     })
 );

@@ -16,7 +16,7 @@ const getSaleById = async (id) => connection()
     .bind('id', id)
     .execute())
   .then((sale) => sale.fetchOne())
-  .then(([ saleId, userId, total, address, number, date, status]) => ({
+  .then(([saleId, userId, total, address, number, date, status]) => ({
     saleId,
     userId,
     total,
@@ -24,7 +24,7 @@ const getSaleById = async (id) => connection()
     number,
     date,
     status,
-  }))
+  }));
 
 const getSaleItems = async (id) => {
   const query = `SELECT s.sale_id, s.quantity, p.name, p.price
@@ -32,17 +32,17 @@ const getSaleItems = async (id) => {
   JOIN Trybeer.products AS p WHERE s.product_id = p.id
   AND s.sale_id = ${id}`;
 
-  return await queryConnection(query)
-  .then((items) => items.fetchAll())
-  .then((fetched) => fetched.map((elem) => (
-    {
-      saleId: elem[0],
-      quantity: elem[1],
-      productName: elem[2],
-      unitPrice: elem[3],
-    }
-    )))
-  };
+  return queryConnection(query)
+    .then((items) => items.fetchAll())
+    .then((fetched) => fetched.map((elem) => (
+      {
+        saleId: elem[0],
+        quantity: elem[1],
+        productName: elem[2],
+        unitPrice: elem[3],
+      }
+    )));
+};
 
 const finishSale = async (id) => connection()
   .then((db) => db
@@ -51,8 +51,8 @@ const finishSale = async (id) => connection()
     .set('status', 'Entregue')
     .where('id = :id')
     .bind('id', id)
-    .execute())
-    
+    .execute());
+
 module.exports = {
   getSales,
   getSaleById,
