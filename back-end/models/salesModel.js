@@ -48,7 +48,7 @@ const finishSale = async (id) => connection()
   .then((db) => db
     .getTable('sales')
     .update()
-    .set('status', 'entregue')
+    .set('status', 'Entregue')
     .where('id = :id')
     .bind('id', id)
     .execute())

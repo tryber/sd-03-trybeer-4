@@ -10,6 +10,18 @@
   color: #1CD118;
 }
 
+.product-unit-price {
+  font-size: 0.8em;
+}
+
+.sale-Pendente-btn {
+  background-color: #1CD118;
+}
+
+.sale-Entregue-btn {
+  display: none;
+}
+
 .sale-items {
   border: 1px solid black;
   height: 80%;
