@@ -91,3 +91,7 @@ export const postNewOrder = async (nameAdress, numberAdress, cart, user, justNum
       justNumberPrice,
     },
   })
+    .catch(({ err }) => err);
+
+  return response;
+};
