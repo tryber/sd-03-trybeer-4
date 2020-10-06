@@ -1,5 +1,4 @@
-const Services = require('../services/saleService');
-const { getAllSales, getSaleInfo, finishSale } = require('../services/saleService');
+const { insertSale, getAllSales, getSaleInfo, endSale } = require('../services/saleService');
 
 const createSale = async (req, res) => {
   const data = req.body;
@@ -7,7 +6,7 @@ const createSale = async (req, res) => {
   const { cart, user, justNumberPrice } = req.body;
   const { id } = user;
 
-  const sale = await Services.createSale(id, nameAdress, numberAdress, justNumberPrice, cart);
+  const sale = await insertSale(id, nameAdress, numberAdress, justNumberPrice, cart);
 
   console.log('Service Response:', sale);
   return res.status(200).json(sale);
@@ -27,6 +26,7 @@ const saleDetails = async (req, res) => {
 const setAsDelivered = async (req, res) => {
   const { id } = req.params;
   const { saleInfo } = await getSaleInfo(id) || [];
+  console.log(saleInfo);
 
   switch (true) {
     case !saleInfo:
@@ -34,7 +34,7 @@ const setAsDelivered = async (req, res) => {
     case saleInfo.status === 'Entregue':
       return res.status(304).json({ message: 'Order was already delivered' });
     case saleInfo.status === 'Pendente':
-      return finishSale(id).then(() => res.status(200));
+      return endSale(id).then(() => res.status(200));
     default:
       return res.status(400).json({ message: 'Sorry. Try again!' });
   }
