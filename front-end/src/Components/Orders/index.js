@@ -37,7 +37,7 @@ const Orders = () => {
     <>
       <MenuBar titleName="Cliente - Meus Pedidos" />
       <section className="orders-list">
-        {orders.sort().map(({ id: orderId, sale_date: date, total_price: total }, index) => (
+        {orders.sort().map(({ id: orderId, saleDate: date, totalPrice: total }, index) => (
           <Link
             data-testid={ `${index}-order-card-container` }
             key={ orderId }
