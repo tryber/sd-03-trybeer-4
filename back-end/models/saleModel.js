@@ -27,14 +27,8 @@ const getAllSales = async (uId) => connection()
     .execute())
   .then((sales) => sales
     .fetchAll()
-    .map((sale) => ({
-      id: sale[0],
-      user_id: sale[1],
-      total_price: sale[2],
-      delivery_address: sale[3],
-      delivery_number: sale[4],
-      sale_date: sale[5],
-      status: sale[6],
+    .map(([id, user_id, total_price, delivery_address, delivery_number, sale_date, status]) => ({
+      id, user_id, total_price, delivery_address, delivery_number, sale_date, status,
     })))
   .catch((err) => err);
 
