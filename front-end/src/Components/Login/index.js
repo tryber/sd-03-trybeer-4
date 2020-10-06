@@ -36,7 +36,7 @@ function LoginPage() {
     <>
       <Header title="Tente Cerveja" />
       <section className="login-container default-color box-shadow">
-        <div className="form">
+        <div className="login-form">
           <label htmlFor="email">
             Email
             <input

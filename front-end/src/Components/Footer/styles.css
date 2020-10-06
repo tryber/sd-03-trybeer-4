@@ -5,6 +5,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  padding: 10px;
+  position: relative;
+  margin: 0;
   width: 100%;
 }
 

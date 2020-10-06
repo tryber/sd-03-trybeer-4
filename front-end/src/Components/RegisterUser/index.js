@@ -52,7 +52,7 @@ const RegisterUser = () => {
     <>
       <MenuBar titleName="TryBeer" />
       <section className="register-container default-color shadow">
-        <img src={ friends } alt="Icone de duas cervejas" width="100px" />
+        <img src={ friends } alt="Icone de duas pessoas tomando cervejas" width="100px" />
         {error.message && <p>{error.message}</p>}
         <form>
           <label htmlFor="userName">
