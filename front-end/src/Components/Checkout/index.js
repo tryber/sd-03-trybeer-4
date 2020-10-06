@@ -58,22 +58,28 @@ const Checkout = () => {
     setCart(getProductsLocalStorage('cart'));
   }, [newCart]);
 
-  console.log('Cart', cart);
   return (
     <div>
       <MenuBar titleName="Finalizar Pedido" />
       <h2>Produtos</h2>
       {cart.length < 1 && <h2>Não há produtos no carrinho</h2>}
-      {cart.map(({ price = zero, productName, quantity, imageURL }, index) => (
-        <div className="cart-products" key={productName}>
+      {cart.map(({
+        price = zero,
+        productName,
+        quantity,
+        imageURL,
+      }, index) => (
+        <div className="cart-products" key={ productName }>
           <div className="container">
-            <div><img className="cart-img" src={imageURL} alt={productName}></img></div>
             <div>
-              <div className="cart-name" data-testid={`${index}-product-name`}>{productName}</div>
+              <img className="cart-img" src={ imageURL } alt={ productName } />
+            </div>
+            <div>
+              <div className="cart-name" data-testid={ `${index}-product-name` }>{ productName }</div>
               <div className="cart-qtd" data-testid={ `${index}-product-qtd-input` }>{ quantity }</div>
             </div>
           </div>
-          
+
           <div className="container">
             <div>
               <div className="cart-total" data-testid={ `${index}-product-total-value` }>
@@ -85,18 +91,18 @@ const Checkout = () => {
             </div>
             <div className="btn-x">
               <button
-              type="submit"
-              value="Submit"
-              data-testid={ `${index}-removal-button` }
-              onClick={ () => removeOrder(index) }
+                type="submit"
+                value="Submit"
+                data-testid={ `${index}-removal-button` }
+                onClick={ () => removeOrder(index) }
               >
-              X
+                X
               </button>
             </div>
           </div>
 
         </div>
-      ))}
+      )) }
 
       <div className="order-total-value" data-testid="order-total-value">
         { `Total: ${totalPrice}` }
@@ -107,28 +113,28 @@ const Checkout = () => {
       <div className="form">
         <label htmlFor="street">
           Rua:
-        <input
-          id="street"
-          name="street"
-          data-testid="checkout-street-input"
-          type="text"
-          required
-          onChange={ (e) => setNameAdress(e.target.value) }
-          value={ nameAdress }
-        />
-      </label>
-      <label htmlFor="number">
-        Número da casa:
-        <input
-          id="number"
-          name="number"
-          data-testid="checkout-house-number-input"
-          type="text"
-          required
-          onChange={ (e) => setNumberAdress(e.target.value) }
-          value={ numberAdress }
-        />
-      </label>
+          <input
+            id="street"
+            name="street"
+            data-testid="checkout-street-input"
+            type="text"
+            required
+            onChange={ (e) => setNameAdress(e.target.value) }
+            value={ nameAdress }
+          />
+        </label>
+        <label htmlFor="number">
+          Número da casa:
+          <input
+            id="number"
+            name="number"
+            data-testid="checkout-house-number-input"
+            type="text"
+            required
+            onChange={ (e) => setNumberAdress(e.target.value) }
+            value={ numberAdress }
+          />
+        </label>
       </div>
       <button
         type="button"
@@ -143,7 +149,7 @@ const Checkout = () => {
       { message && goToProducts()}
       <div>
         <a href="https://stories.freepik.com/business">
-          <img className="delivery-img" src={Delivery} alt="delivery"></img>
+          <img className="delivery-img" src={ Delivery } alt="delivery" />
         </a>
       </div>
     </div>
