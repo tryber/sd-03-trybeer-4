@@ -141,9 +141,11 @@ const Checkout = () => {
       </button>
       { message && <p>{message}</p> }
       { message && goToProducts()}
-      <a href="https://stories.freepik.com/business">
-        <img className="delivery-img" src={Delivery} alt="delivery"></img>
-      </a>
+      <div>
+        <a href="https://stories.freepik.com/business">
+          <img className="delivery-img" src={Delivery} alt="delivery"></img>
+        </a>
+      </div>
     </div>
   );
 };
