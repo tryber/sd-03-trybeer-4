@@ -5,13 +5,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  position: absolute;
   width: 100%;
 }
 
 @media screen and ( min-width: 500px ) {
   .footer-container {
-    position: fixed;
     bottom: 0;
   }
 }

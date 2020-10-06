@@ -67,3 +67,8 @@
 .confirm-btn:disabled {
   color: white;
 }
+
+footer {
+  position: absolute;
+  bottom: 0;
+}
