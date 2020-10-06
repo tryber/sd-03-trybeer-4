@@ -13,9 +13,10 @@ const ProductsPage = () => {
     <div className="products-list">
       <MenuBar titleName="TryBeer" />
       {products.map(({
-        name, price, urlImage, quantity,
+        id, name, price, urlImage, quantity,
       }, index) => (
         <BeerCard
+          id={ id }
           productName={ name }
           price={ price }
           imageURL={ urlImage }

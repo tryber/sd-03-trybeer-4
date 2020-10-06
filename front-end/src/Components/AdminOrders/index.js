@@ -6,7 +6,7 @@ const AdminOrders = () => (
   <div className="admin-orders">
     <AdminSideBar />
     <div className="admin-orders-aside">
-      <h1>Pagina de Pedidos doAdmin</h1>
+      <h1>Pagina de Pedidos do Admin</h1>
     </div>
   </div>
 );

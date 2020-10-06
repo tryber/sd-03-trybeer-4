@@ -31,6 +31,26 @@ const mockOrders = [
     date: '16/01',
     total: 199.74,
   },
+  {
+    orderId: 7,
+    date: '16/01',
+    total: 19.47,
+  },
+  {
+    orderId: 8,
+    date: '20/01',
+    total: 47.20,
+  },
+  {
+    orderId: 9,
+    date: '14/02',
+    total: 295.70,
+  },
+  {
+    orderId: 10,
+    date: '15/02',
+    total: 12.20,
+  },
 ];
 
 const getOrdersFromAPI = () => mockOrders;

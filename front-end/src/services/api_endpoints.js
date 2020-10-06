@@ -33,10 +33,13 @@ export const postNewUserAPI = async (name, email, password, seller) => {
   return dataResponse;
 };
 
-export const postUpdateName = async (name, email) => {
+export const postUpdateName = async (name, email, token) => {
   const response = await axios({
     baseURL: `${url}profile`,
     method: 'post',
+    headers: {
+      authorization: token,
+    },
     data: {
       name,
       email,
@@ -57,6 +60,37 @@ export const getProductsFromAPI = async (token) => {
     },
   })
     .then((resp) => resp.data)
+    .catch(({ err }) => err);
+
+  return response;
+};
+
+export const getOrdersFromAPI = async (token) => {
+  const response = await axios({
+    baseURL: `${url}orders`,
+    method: 'get',
+    headers: {
+      authorization: token,
+    },
+  })
+    .then((res) => res.data)
+    .catch(({ err }) => err);
+
+  return response;
+};
+
+export const postNewOrder = async (nameAdress, numberAdress, cart, user, justNumberPrice) => {
+  const response = await axios({
+    baseURL: `${url}orders`,
+    method: 'post',
+    data: {
+      nameAdress,
+      numberAdress,
+      cart,
+      user,
+      justNumberPrice,
+    },
+  })
     .catch(({ err }) => err);
 
   return response;
