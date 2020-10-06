@@ -22,7 +22,7 @@ const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
 const getAllSales = async (uId) => {
   const sales = await Model.getAllSales(uId);
   return sales;
-}
+};
 
 module.exports = {
   createSale,

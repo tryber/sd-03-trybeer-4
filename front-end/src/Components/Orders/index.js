@@ -2,41 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import MenuBar from '../MenuBar';
 import { getProductsLocalStorage } from '../../utils/localStorage';
-import { getOrdersFromAPI } from '../../services/api_endpoints'
+import { getOrdersFromAPI } from '../../services/api_endpoints';
 import './styles.css';
 import Footer from '../Footer';
 
-const mockOrders = [
-  {
-    id: 1,
-    sale_date: '01/01',
-    total_price: 109.9,
-  },
-  {
-    id: 2,
-    sale_date: '02/01',
-    total_price: 114.3,
-  },
-  {
-    id: 3,
-    sale_date: '05/01',
-    total_price: 49.7,
-  },
-  {
-    id: 5,
-    sale_date: '16/01',
-    total_price: 19.9,
-  },
-  {
-    id: 6,
-    sale_date: '16/01',
-    total_price: 199.74,
-  },
-];
-
 const Orders = () => {
   const quantityOfDigits = 2;
-  const [orders, setOrders] = useState(mockOrders);
+  const dateDigit = 10;
+  const [orders, setOrders] = useState([]);
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
@@ -49,15 +22,15 @@ const Orders = () => {
     if (!token) setRedirect(true);
     fetchData(token, id);
   }, []);
-  
+
   const formatDate = (date) => {
-    const day = new Date(date).getDate()
+    const day = new Date(date).getDate();
     const month = new Date(date).getMonth() + 1;
-    if (day < 10) return `0${day}/${month}`;
+    if (day < dateDigit) return `0${day}/${month}`;
     return `${day}/${month}`;
   };
 
-  const formatTotal = (total) => `R$ ${total.toFixed(quantityOfDigits).replace('.', ',')}`
+  const formatTotal = (total) => `R$ ${total.toFixed(quantityOfDigits).replace('.', ',')}`;
 
   if (redirect) return <Redirect to="/login" />;
   return (

@@ -18,7 +18,7 @@ const getSales = async (req, res) => {
   const { id } = jwt.verify(authorization, JWT_SECRET);
   const sales = await Services.getAllSales(id);
   return res.status(200).json(sales);
-}
+};
 
 module.exports = {
   createSale,
