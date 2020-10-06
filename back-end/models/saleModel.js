@@ -18,7 +18,7 @@ const registerSaleProduct = async (saleId, productId, quantity) => connection()
     .execute())
   .catch((err) => err);
 
-  const getSales = async () => connection()
+const getSales = async () => connection()
   .then((db) => db
     .getTable('sales')
     .select()
