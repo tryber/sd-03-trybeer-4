@@ -1,6 +1,6 @@
 const moment = require('moment');
 const salesModel = require('../models/saleModel');
-const { getSales, getSaleById, getSaleItems } = require('../models/saleModel');
+const { getSalesById, getSales, getSaleById, getSaleItems } = require('../models/saleModel');
 
 const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
   // moment.locale('pt-BR');
@@ -28,7 +28,7 @@ const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
 };
 
 const getSalesByUser = async (uId) => {
-  const sales = await Model.getAllSales(uId);
+  const sales = await getSalesById(uId);
   return sales;
 };
 

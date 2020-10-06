@@ -18,7 +18,7 @@ const registerSaleProduct = async (saleId, productId, quantity) => connection()
     .execute())
   .catch((err) => err);
 
-const getAllSales = async (uId) => connection()
+const getSalesById = async (uId) => connection()
   .then((schema) => schema
     .getTable('sales')
     .select()
@@ -88,7 +88,7 @@ const finishSale = async (id) => connection()
 module.exports = {
   createSale,
   registerSaleProduct,
-  getAllSales,
+  getSalesById,
   getSales,
   getSaleById,
   getSaleItems,
