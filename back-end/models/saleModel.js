@@ -22,8 +22,20 @@ const getAllSales = async (uId) => connection()
   .then((schema) => schema
     .getTable('sales')
     .select()
+    .where('user_id = :uId')
+    .bind('uId', uId)
     .execute())
-  .then((sales) => sales.fetchAll())
+  .then((sales) => sales
+    .fetchAll()
+    .map((sale) => ({
+      id: sale[0],
+      user_id: sale[1],
+      total_price: sale[2],
+      delivery_address: sale[3],
+      delivery_number: sale[4],
+      sale_date: sale[5],
+      status: sale[6],
+    })))
   .catch((err) => err);
 
 // const updateStatus = async (id) => connection()

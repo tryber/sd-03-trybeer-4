@@ -21,7 +21,6 @@ const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
 
 const getAllSales = async (uId) => {
   const sales = await Model.getAllSales(uId);
-  console.log(sales);
   return sales;
 }
 

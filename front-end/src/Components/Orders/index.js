@@ -8,29 +8,29 @@ import Footer from '../Footer';
 
 const mockOrders = [
   {
-    orderId: 1,
-    date: '01/01',
-    total: 109.9,
+    id: 1,
+    sale_date: '01/01',
+    total_price: 109.9,
   },
   {
-    orderId: 2,
-    date: '02/01',
-    total: 114.3,
+    id: 2,
+    sale_date: '02/01',
+    total_price: 114.3,
   },
   {
-    orderId: 3,
-    date: '05/01',
-    total: 49.7,
+    id: 3,
+    sale_date: '05/01',
+    total_price: 49.7,
   },
   {
-    orderId: 5,
-    date: '16/01',
-    total: 19.9,
+    id: 5,
+    sale_date: '16/01',
+    total_price: 19.9,
   },
   {
-    orderId: 6,
-    date: '16/01',
-    total: 199.74,
+    id: 6,
+    sale_date: '16/01',
+    total_price: 199.74,
   },
 ];
 
@@ -49,14 +49,22 @@ const Orders = () => {
     if (!token) setRedirect(true);
     fetchData(token, id);
   }, []);
-  console.log(orders);
+  
+  const formatDate = (date) => {
+    const day = new Date(date).getDate()
+    const month = new Date(date).getMonth() + 1;
+    if (day < 10) return `0${day}/${month}`;
+    return `${day}/${month}`;
+  };
+
+  const formatTotal = (total) => `R$ ${total.toFixed(quantityOfDigits).replace('.', ',')}`
 
   if (redirect) return <Redirect to="/login" />;
   return (
     <>
       <MenuBar titleName="Cliente - Meus Pedidos" />
       <section className="orders-list">
-        {orders.sort().map(({ orderId, date, total }, index) => (
+        {orders.sort().map(({ id: orderId, sale_date: date, total_price: total }, index) => (
           <Link
             data-testid={ `${index}-order-card-container` }
             key={ orderId }
@@ -72,13 +80,13 @@ const Orders = () => {
             <div className="order-info">
               <span>Data:</span>
               <span data-testid={ `${index}-order-date` }>
-                { date }
+                { formatDate(date) }
               </span>
             </div>
             <div className="order-info">
-              <span>Total pago (R$)</span>
+              <span>Total pago</span>
               <span data-testid={ `${index}-order-total-value` }>
-                { total.toFixed(quantityOfDigits) }
+                { formatTotal(total) }
               </span>
             </div>
           </Link>
