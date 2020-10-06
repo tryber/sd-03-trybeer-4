@@ -24,8 +24,7 @@ const OrderCard = ({
         data-testid={ `${dtttId}-order-total-value` }
         className="order-total"
       >
-        R$
-        { `${totalPrice.toLocaleString('pt-BR', {
+        { `R$ ${totalPrice.toLocaleString('pt-BR', {
           minimumFractionDigits: 2,
         })}` }
       </span>

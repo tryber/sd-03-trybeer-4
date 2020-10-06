@@ -5,10 +5,10 @@ import AdminSideBar from '../AdminSideBar/index';
 import './styles.css';
 
 const AdminOrdersDetail = ({ id }) => {
-  const [saleInfo, setSaleInfo] = useState([]);
+  const [saleInfo, setSaleInfo] = useState({ total: 0 });
   const [saleItems, setSaleItems] = useState([]);
-  const { saleId, total } = saleInfo;
   const [saleStatus, setSaleStatus] = useState();
+  const { saleId, total } = saleInfo;
 
   const markAsDelivered = async () => {
     setSaleStatus('Entregue');
@@ -29,13 +29,12 @@ const AdminOrdersDetail = ({ id }) => {
       <AdminSideBar />
       <div>
         <h1>
-          Pedido
           <span data-testid="order-number">
-            {` ${saleId} - `}
+            {`Pedido ${saleId}`}
           </span>
           <span
             data-testid="order-status"
-            className={ `sale-${saleStatus}` }
+            className={ ` - sale-${saleStatus}` }
           >
             {saleStatus}
           </span>
@@ -51,21 +50,29 @@ const AdminOrdersDetail = ({ id }) => {
                   {`${productName} - `}
                 </span>
                 <span data-testid={ `${index}-product-total-value` }>
-                  {`R$ ${unitPrice * quantity}`}
+                  {`R$ ${(unitPrice * quantity).toLocaleString('pt-BR', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}`}
                 </span>
                 <span
                   className="product-unit-price"
                   data-testid={ `${index}-order-unit-price` }
                 >
-                  {`R$ ${unitPrice}`}
+                  {`(R$ ${(unitPrice).toLocaleString('pt-BR', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })})`}
                   )
                 </span>
               </li>
             ))}
           </ul>
           <h2 data-testid="order-total-value">
-            Total: R$
-            {total}
+            {`Total: R$ ${total.toLocaleString('pt-BR', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}`}
           </h2>
         </div>
         <button

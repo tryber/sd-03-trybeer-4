@@ -5,7 +5,7 @@ const { getSales, getSaleById, getSaleItems } = require('../models/saleModel');
 const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
   // moment.locale('pt-BR');
   const date = moment().format('YYYY/MM/DD h:mm:ss');
-  const status = 'pendente';
+  const status = 'Pendente';
 
   // Registrando venda na tabela sales e retornando o Id da Venda.
   const sale = await salesModel.createSale(
