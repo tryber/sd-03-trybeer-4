@@ -13,11 +13,11 @@ const AdminProfile = () => {
       <AdminSideBar />
       <div className="admin-profile-aside">
         <h1>Perfil</h1>
-        <h3>
+        <h3 className="admin-profile-box">
           Nome:
           <span data-testid="profile-name">{name}</span>
         </h3>
-        <h3>
+        <h3 className="admin-profile-box">
           Email:
           <span data-testid="profile-email">{email}</span>
         </h3>

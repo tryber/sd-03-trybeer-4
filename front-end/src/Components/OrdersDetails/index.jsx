@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Redirect, Link, useParams  } from 'react-router-dom';
 // import { getOrdersFromAPI } from '../../services/api_endpoints';
 import MenuBar from '../MenuBar';
+import Footer from '../Footer';
 import './styles.css';
 import realFormat from '../../utils/realFormat';
 
@@ -47,7 +48,7 @@ const OrdersDetails = () => {
 
   return (
     <div>
-      <MenuBar titleName="CLiente - Detalhes de Pedido" />
+      <MenuBar titleName="Cliente - Detalhes de Pedido" />
       {order &&
         <div  className="order-details box-shadow">
           <div className="order-head">

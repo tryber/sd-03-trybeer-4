@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import BeerCard from '../BeerCard';
 import BeerContext from '../../Context/BeerContext/BeerContext';
 import MenuBar from '../MenuBar';
+import Footer from '../Footer';
 import './styles.css';
 
 const ProductsPage = () => {
@@ -41,6 +42,7 @@ const ProductsPage = () => {
           </span>
         </button>
       </Link>
+      <Footer />
     </div>
   );
 };

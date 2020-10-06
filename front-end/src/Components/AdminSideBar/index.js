@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './styles.css';
 
 const AdminSideBar = () => (
-  <div className="admin-side-bar-container">
+  <div className="admin-side-bar-container box-shadow">
     <div>
       <h1>TryBeer</h1>
       <Link to="/admin/orders">
