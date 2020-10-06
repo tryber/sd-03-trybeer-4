@@ -65,7 +65,7 @@ export const getProductsFromAPI = async (token) => {
   return response;
 };
 
-export const getOrdersFromAPI = async (token) => {
+export const getOrdersFromAPI = async (token, id) => {
   const response = await axios({
     baseURL: `${url}orders`,
     method: 'get',

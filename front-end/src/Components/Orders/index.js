@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import MenuBar from '../MenuBar';
 import { getProductsLocalStorage } from '../../utils/localStorage';
+import { getOrdersFromAPI } from '../../services/api_endpoints'
 import './styles.css';
 import Footer from '../Footer';
 
@@ -33,19 +34,22 @@ const mockOrders = [
   },
 ];
 
-const getOrdersFromAPI = () => mockOrders;
-
 const Orders = () => {
   const quantityOfDigits = 2;
   const [orders, setOrders] = useState(mockOrders);
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-    const { token } = getProductsLocalStorage('user');
+    const fetchData = async (token, id) => {
+      const sales = await getOrdersFromAPI(token, id);
+      setOrders(sales);
+      return sales;
+    };
+    const { id, token } = getProductsLocalStorage('user');
     if (!token) setRedirect(true);
-    const orderList = getOrdersFromAPI(token);
-    setOrders(orderList);
+    fetchData(token, id);
   }, []);
+  console.log(orders);
 
   if (redirect) return <Redirect to="/login" />;
   return (
@@ -60,9 +64,9 @@ const Orders = () => {
             to={ `orders/${orderId}` }
           >
             <div className="order-info">
-              <span className="info-label">Pedido n°:</span>
+              <span className="info-label">Pedido:</span>
               <span data-testid={ `${index}-order-number` }>
-                { ` ${orderId}` }
+                { `Pedido ${orderId}` }
               </span>
             </div>
             <div className="order-info">

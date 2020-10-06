@@ -10,7 +10,7 @@ const {
 } = require('./controllers/userController');
 
 const { getAllProducts } = require('./controllers/productController');
-const { createSale } = require('./controllers/saleController');
+const { createSale, getSales } = require('./controllers/saleController');
 const auth = require('./middlewares/auth');
 const errorHandler = require('./middlewares/errorHandler');
 
@@ -24,6 +24,8 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.get('/', (_req, res) => res.send());
 
 app.get('/products', auth(true), (req, res) => getAllProducts(req, res));
+
+app.get('/orders', (req, res) => getSales(req, res));
 
 app.post('/login', (req, res) => loginController(req, res));
 

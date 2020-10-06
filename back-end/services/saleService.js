@@ -20,6 +20,12 @@ const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
   return { message: 'Compra realizada com sucesso!' };
 };
 
+const getAllSales = async (uId) => {
+  const sales = await Model.getAllSales(uId);
+  return sales;
+}
+
 module.exports = {
   createSale,
+  getAllSales,
 };

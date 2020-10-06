@@ -18,6 +18,16 @@ const registerSaleProduct = async (saleId, productId, quantity) => connection()
     .execute())
   .catch((err) => err);
 
+const getAllSales = async (uId) => connection()
+  .then((schema) => schema
+    .getTable('sales')
+    .select()
+    .where('user_id = :user_id')
+    .bind('user_id', uId)
+    .execute())
+  .then((sales) => sales.fetchAll())
+  .catch((err) => err);
+
 // const updateStatus = async (id) => connection()
 //   .then((schema) => schema
 //     .getTable('sales')
@@ -31,5 +41,6 @@ const registerSaleProduct = async (saleId, productId, quantity) => connection()
 module.exports = {
   createSale,
   registerSaleProduct,
+  getAllSales,
   // updateStatus,
 };
