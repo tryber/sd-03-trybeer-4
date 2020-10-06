@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { AdminOrdersDetail } from '../Components';
-import AdminOrdersPage from '../Components/AdminOrders';
 import BeerProvider from '../Context/BeerContext/BeerProvider';
 import {
   register,
@@ -22,15 +21,14 @@ const Routes = () => (
       <Route exact path="/login" component={ login } />
       <Route exact path="/register" component={ register } />
       <Route exact path="/profile" component={ clientProfile } />
-      <Route exact path="/admin/orders" component={ AdminOrdersPage } />
       <Route exact path="/products" component={ products } />
       <Route exact path="/orders" component={ orders } />
       <BeerProvider>
         <Route exact path="/products" component={ products } />
         <Route exact path="/orders" component={ orders } />
-        <Route exact path="/orders/:id" component={ ordersDetails } />
         <Route exact path="/checkout" component={ checkout } />
         <Route exact path="/admin/orders" component={ adminOrders } />
+        <Route exact path="/orders/:id" component={ ordersDetails } />
         <Route
           exact
           path="/admin/orders/:id"
