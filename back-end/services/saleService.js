@@ -1,6 +1,6 @@
 const moment = require('moment');
 const salesModel = require('../models/saleModel');
-const { getSales, getSaleById, getSaleItems } = require('../models/saleModel');
+const { getSalesById, getSales, getSaleById, getSaleItems } = require('../models/saleModel');
 
 const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
   // moment.locale('pt-BR');
@@ -17,7 +17,6 @@ const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
     status,
   );
 
-  console.log('Sale Id :', sale);
   // Para cada Produto do Carrinho, cria-se um registro do produto na tabela sales_products
   // passando Id da Venda + Id Produto + Quantidade
   cart.forEach(async (productCart) => {
@@ -26,6 +25,11 @@ const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
   });
 
   return { message: 'Compra realizada com sucesso!' };
+};
+
+const getSalesByUser = async (uId) => {
+  const sales = await getSalesById(uId);
+  return sales;
 };
 
 const getAllSales = async () => {
@@ -51,6 +55,7 @@ const finishSale = async (id) => salesModel.finishSale(id);
 module.exports = {
   createSale,
   getAllSales,
+  getSalesByUser,
   getSaleInfo,
   finishSale,
 };

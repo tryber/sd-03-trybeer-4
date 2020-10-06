@@ -10,7 +10,9 @@ const {
 } = require('./controllers/userController');
 
 const { getAllProducts } = require('./controllers/productController');
-const { createSale, listSales, saleDetails, setAsDelivered } = require('./controllers/saleController');
+
+const { createSale, getSales, listSales, saleDetails, setAsDelivered } = require('./controllers/saleController');
+
 const auth = require('./middlewares/auth');
 const errorHandler = require('./middlewares/errorHandler');
 
@@ -27,6 +29,8 @@ app.get('/products', auth(true), (req, res) => getAllProducts(req, res));
 app.get('/admin/orders', listSales);
 app.get('/admin/orders/:id', saleDetails);
 app.post('/admin/orders/:id', setAsDelivered);
+
+app.get('/orders', (req, res) => getSales(req, res));
 
 app.post('/login', (req, res) => loginController(req, res));
 app.post('/register', (req, res) => registerController(req, res));
