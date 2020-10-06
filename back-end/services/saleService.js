@@ -9,7 +9,6 @@ const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
   // Registrando venda na tabela sales e retornando o Id da Venda.
   const sale = await Model.createSale(id, totalPrice, addressName, addressNumber, date, status);
 
-  console.log('Sale Id :', sale);
   // Para cada Produto do Carrinho, cria-se um registro do produto na tabela sales_products
   // passando Id da Venda + Id Produto + Quantidade
   cart.forEach(async (productCart) => {
@@ -22,6 +21,7 @@ const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
 
 const getAllSales = async (uId) => {
   const sales = await Model.getAllSales(uId);
+  console.log(sales);
   return sales;
 }
 
