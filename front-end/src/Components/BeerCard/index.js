@@ -18,7 +18,7 @@ const BeerCard = ({
   index,
 }) => {
   const sumQuantity = 1;
-  const discountValue = 0.1;
+  const discountValue = 0.5;
   const zero = 0;
   const [quantity, setQuantity] = useState(initialQuantity);
   const { setTotal } = useContext(BeerContext);
@@ -77,7 +77,7 @@ const BeerCard = ({
             })}`}
           </span>
         </div>
-        <span className="discount">-10%</span>
+        <span className="discount">-50%</span>
       </div>
       <div className="product-img">
         <img
