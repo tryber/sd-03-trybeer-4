@@ -4,6 +4,7 @@ import MenuBar from '../MenuBar';
 import { getProductsLocalStorage } from '../../utils/localStorage';
 import { postNewOrder } from '../../services/api_endpoints';
 import Delivery from '../../images/delivery.png';
+import Footer from '../Footer';
 
 import './styles.css';
 
@@ -152,6 +153,7 @@ const Checkout = () => {
           <img className="delivery-img" src={ Delivery } alt="delivery" />
         </a>
       </div>
+      <Footer />
     </div>
   );
 };
