@@ -1,8 +1,8 @@
 import {
-  fireEvent, cleanup,
+  cleanup,
 } from '@testing-library/react';
 import {
-  getProductsLocalStorage, removeLocalStorage, updateProductInLocalStorage, addProductToLocalStorage,
+  getProductsLocalStorage, addProductToLocalStorage,
 } from '../utils/localStorage';
 import mockProducts from './testUtilities/mock/mockProducts';
 
