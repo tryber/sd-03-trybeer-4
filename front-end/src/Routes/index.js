@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { AdminOrdersDetail } from '../Components';
 import BeerProvider from '../Context/BeerContext/BeerProvider';
 import {
   register,
@@ -11,7 +12,6 @@ import {
   checkout,
   adminProfile,
   adminOrders,
-  adminOrdersDetail,
 } from '../pages';
 
 const Routes = () => (
@@ -27,7 +27,14 @@ const Routes = () => (
         <Route exact path="/orders/:id" component={ ordersDetails } />
         <Route exact path="/checkout" component={ checkout } />
         <Route exact path="/admin/orders" component={ adminOrders } />
-        <Route exact path="/admin/orders/:id" component={ adminOrdersDetail } />
+        <Route exact path="/orders/:id" component={ ordersDetails } />
+        <Route
+          exact
+          path="/admin/orders/:id"
+          render={ ({ match }) => (<AdminOrdersDetail
+            id={ Number(match.params.id) }
+          />) }
+        />
         <Route exact path="/admin/profile" component={ adminProfile } />
       </BeerProvider>
     </Switch>

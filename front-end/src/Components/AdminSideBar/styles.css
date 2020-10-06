@@ -1,6 +1,6 @@
 .admin-side-bar-container {
   border: 1px solid black;
-  width: 400px;
+  width: 250px;
   height: 100vh;
   display: flex;
   flex-direction: column;
