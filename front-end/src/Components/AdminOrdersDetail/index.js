@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { getOrderData, markOrderAsDelivered } from '../../services/api_endpoints';
 import AdminSideBar from '../AdminSideBar/index';
+import realFormat from '../../utils/realFormat'
 import './styles.css';
 
 const AdminOrdersDetail = () => {
@@ -55,29 +55,23 @@ const AdminOrdersDetail = () => {
                   {`${productName} - `}
                 </span>
                 <span data-testid={ `${index}-product-total-value` }>
-                  {`R$ ${(unitPrice * quantity).toLocaleString('pt-BR', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}`}
+                  {`R$ ${realFormat(unitPrice * quantity)}`}
                 </span>
                 <span
                   className="product-unit-price"
                   data-testid={ `${index}-order-unit-price` }
                 >
-                  {`(R$ ${(unitPrice).toLocaleString('pt-BR', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })})`}
+                  {`(R$ ${realFormat(unitPrice)}`}
                   )
                 </span>
               </li>
             ))}
           </ul>
-          <h2 data-testid="order-total-value">
-            {`Total: R$ ${total.toLocaleString('pt-BR', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}`}
+          <h2
+            data-testid="order-total-value"
+            className="sale-total"
+          >
+            {`Total: R$ ${realFormat(total)}`}
           </h2>
         </div>
         <button
@@ -91,10 +85,6 @@ const AdminOrdersDetail = () => {
       </div>
     </div>
   );
-};
-
-AdminOrdersDetail.propTypes = {
-  id: PropTypes.number.isRequired,
 };
 
 export default AdminOrdersDetail;

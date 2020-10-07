@@ -1,6 +1,11 @@
-const { insertSale, getAllSales, getSaleInfo, endSale } = require('../services/saleService');
 const jwt = require('jsonwebtoken');
-const Services = require('../services/saleService');
+const {
+  insertSale,
+  getAllSales,
+  getSaleInfo,
+  getSalesByUser,
+  endSale,
+} = require('../services/saleService');
 
 const createSale = async (req, res) => {
   const data = req.body;
@@ -17,7 +22,7 @@ const getSales = async (req, res) => {
   const { authorization } = req.headers;
   const JWT_SECRET = 'tentecerveja';
   const { id } = jwt.verify(authorization, JWT_SECRET);
-  const sales = await Services.getSalesByUser(id);
+  const sales = await getSalesByUser(id);
   return res.status(200).json(sales);
 };
 

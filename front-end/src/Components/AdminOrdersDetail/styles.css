@@ -38,3 +38,8 @@
   margin: 20px 50px;
   width: 100%;
 }
+
+.sale-total {
+  bottom: 5%;
+  position: absolute;
+}
