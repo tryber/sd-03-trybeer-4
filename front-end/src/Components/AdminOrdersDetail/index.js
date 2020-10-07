@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getOrderData, markOrderAsDelivered } from '../../services/api_endpoints';
 import AdminSideBar from '../AdminSideBar/index';
-import realFormat from '../../utils/realFormat'
+import realFormat from '../../utils/realFormat';
 import './styles.css';
 
 const AdminOrdersDetail = () => {
