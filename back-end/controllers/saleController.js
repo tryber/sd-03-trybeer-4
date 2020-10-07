@@ -1,4 +1,6 @@
 const { insertSale, getAllSales, getSaleInfo, endSale } = require('../services/saleService');
+const jwt = require('jsonwebtoken');
+const Services = require('../services/saleService');
 
 const createSale = async (req, res) => {
   const data = req.body;
@@ -8,8 +10,15 @@ const createSale = async (req, res) => {
 
   const sale = await insertSale(id, nameAdress, numberAdress, justNumberPrice, cart);
 
-  console.log('Service Response:', sale);
   return res.status(200).json(sale);
+};
+
+const getSales = async (req, res) => {
+  const { authorization } = req.headers;
+  const JWT_SECRET = 'tentecerveja';
+  const { id } = jwt.verify(authorization, JWT_SECRET);
+  const sales = await Services.getSalesByUser(id);
+  return res.status(200).json(sales);
 };
 
 const listSales = async (_req, res) => {
@@ -41,6 +50,7 @@ const setAsDelivered = async (req, res) => {
 
 module.exports = {
   createSale,
+  getSales,
   listSales,
   saleDetails,
   setAsDelivered,

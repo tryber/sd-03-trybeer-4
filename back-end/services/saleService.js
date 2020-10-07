@@ -4,6 +4,7 @@ const {
   createSale,
   getSales,
   getSaleById,
+  getSalesById,
   getSaleItems,
   finishSale,
 } = require('../models/saleModel');
@@ -23,7 +24,6 @@ const insertSale = async (id, addressName, addressNumber, totalPrice, cart) => {
     status,
   );
 
-  console.log('Sale Id :', sale);
   // Para cada Produto do Carrinho, cria-se um registro do produto na tabela sales_products
   // passando Id da Venda + Id Produto + Quantidade
   cart.forEach(async (productCart) => {
@@ -32,6 +32,11 @@ const insertSale = async (id, addressName, addressNumber, totalPrice, cart) => {
   });
 
   return { message: 'Compra realizada com sucesso!' };
+};
+
+const getSalesByUser = async (uId) => {
+  const sales = await getSalesById(uId);
+  return sales;
 };
 
 const getAllSales = async () => {
@@ -57,6 +62,7 @@ const endSale = async (id) => finishSale(id);
 module.exports = {
   insertSale,
   getAllSales,
+  getSalesByUser,
   getSaleInfo,
   endSale,
 };

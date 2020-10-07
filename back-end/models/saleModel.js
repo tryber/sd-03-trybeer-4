@@ -18,6 +18,20 @@ const registerSaleProduct = async (saleId, productId, quantity) => connection()
     .execute())
   .catch((err) => err);
 
+const getSalesById = async (uId) => connection()
+  .then((schema) => schema
+    .getTable('sales')
+    .select()
+    .where('user_id = :uId')
+    .bind('uId', uId)
+    .execute())
+  .then((sales) => sales
+    .fetchAll()
+    .map(([id, userId, totalPrice, deliveryAddress, deliveryNumber, saleDate, status]) => ({
+      id, userId, totalPrice, deliveryAddress, deliveryNumber, saleDate, status,
+    })))
+  .catch((err) => err);
+
 const getSales = async () => connection()
   .then((db) => db
     .getTable('sales')
@@ -74,6 +88,7 @@ const finishSale = async (id) => connection()
 module.exports = {
   createSale,
   registerSaleProduct,
+  getSalesById,
   getSales,
   getSaleById,
   getSaleItems,
