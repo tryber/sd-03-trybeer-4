@@ -2,12 +2,21 @@
   display: flex;
 }
 
+.sale-number {
+  position: relative;
+  right: 25%;
+}
+
 .sale-Pendente {
   color: #CBDA23;
+  position: absolute;
+  right: 5%;
 }
 
 .sale-Entregue {
   color: #1CD118;
+  position: absolute;
+  right: 5%;
 }
 
 .product-unit-price {
@@ -16,6 +25,7 @@
 
 .sale-Pendente-btn {
   background-color: #1CD118;
+  padding: 2% 8%;
 }
 
 .sale-Entregue-btn {

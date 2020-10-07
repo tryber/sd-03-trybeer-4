@@ -43,7 +43,7 @@ const OrdersDetails = () => {
 
   return (
     <div>
-      <MenuBar titleName="CLiente - Detalhes de Pedido" />
+      <MenuBar titleName="Cliente - Detalhes de Pedido" />
       {order &&
         <div>
           <h3 data-testid="order-number" >{`Pedido ${order.id}`}</h3>

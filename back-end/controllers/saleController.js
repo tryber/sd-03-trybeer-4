@@ -26,7 +26,6 @@ const saleDetails = async (req, res) => {
 const setAsDelivered = async (req, res) => {
   const { id } = req.params;
   const { saleInfo } = await getSaleInfo(id) || [];
-  console.log(saleInfo);
 
   switch (true) {
     case !saleInfo:

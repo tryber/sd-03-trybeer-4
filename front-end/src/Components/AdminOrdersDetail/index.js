@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getOrderData, markOrderAsDelivered } from '../../services/api_endpoints';
 import AdminSideBar from '../AdminSideBar/index';
 import './styles.css';
 
-const AdminOrdersDetail = ({ id }) => {
+const AdminOrdersDetail = () => {
   const [saleInfo, setSaleInfo] = useState({ total: 0 });
   const [saleItems, setSaleItems] = useState([]);
   const [saleStatus, setSaleStatus] = useState();
   const { saleId, total } = saleInfo;
+  const { id } = useParams();
 
   const markAsDelivered = async () => {
     setSaleStatus('Entregue');
@@ -29,12 +31,15 @@ const AdminOrdersDetail = ({ id }) => {
       <AdminSideBar />
       <div>
         <h1>
-          <span data-testid="order-number">
+          <span
+            data-testid="order-number"
+            className="sale-number"
+          >
             {`Pedido ${saleId}`}
           </span>
           <span
             data-testid="order-status"
-            className={ ` - sale-${saleStatus}` }
+            className={ `sale-${saleStatus}` }
           >
             {saleStatus}
           </span>
