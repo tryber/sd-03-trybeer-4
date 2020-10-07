@@ -1,14 +1,21 @@
 const moment = require('moment');
-const salesModel = require('../models/saleModel');
-const { getSalesById, getSales, getSaleById, getSaleItems } = require('../models/saleModel');
+const {
+  registerSaleProduct,
+  createSale,
+  getSales,
+  getSaleById,
+  getSalesById,
+  getSaleItems,
+  finishSale,
+} = require('../models/saleModel');
 
-const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
+const insertSale = async (id, addressName, addressNumber, totalPrice, cart) => {
   // moment.locale('pt-BR');
   const date = moment().format('YYYY/MM/DD h:mm:ss');
   const status = 'Pendente';
 
   // Registrando venda na tabela sales e retornando o Id da Venda.
-  const sale = await salesModel.createSale(
+  const sale = await createSale(
     id,
     totalPrice,
     addressName,
@@ -21,7 +28,7 @@ const createSale = async (id, addressName, addressNumber, totalPrice, cart) => {
   // passando Id da Venda + Id Produto + Quantidade
   cart.forEach(async (productCart) => {
     const { id: prodId, quantity } = productCart;
-    await salesModel.registerSaleProduct(sale, prodId, quantity);
+    await registerSaleProduct(sale, prodId, quantity);
   });
 
   return { message: 'Compra realizada com sucesso!' };
@@ -50,12 +57,12 @@ const getSaleInfo = async (id) => {
     : { code: 404, message: 'Sale not found' };
 };
 
-const finishSale = async (id) => salesModel.finishSale(id);
+const endSale = async (id) => finishSale(id);
 
 module.exports = {
-  createSale,
+  insertSale,
   getAllSales,
   getSalesByUser,
   getSaleInfo,
-  finishSale,
+  endSale,
 };

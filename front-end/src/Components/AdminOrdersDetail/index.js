@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 import { getOrderData, markOrderAsDelivered } from '../../services/api_endpoints';
 import AdminSideBar from '../AdminSideBar/index';
+import realFormat from '../../utils/realFormat';
 import './styles.css';
 
-const AdminOrdersDetail = ({ id }) => {
+const AdminOrdersDetail = () => {
   const [saleInfo, setSaleInfo] = useState({ total: 0 });
   const [saleItems, setSaleItems] = useState([]);
   const [saleStatus, setSaleStatus] = useState();
   const { saleId, total } = saleInfo;
+  const { id } = useParams();
 
   const markAsDelivered = async () => {
     setSaleStatus('Entregue');
@@ -29,12 +31,15 @@ const AdminOrdersDetail = ({ id }) => {
       <AdminSideBar />
       <div>
         <h1>
-          <span data-testid="order-number">
+          <span
+            data-testid="order-number"
+            className="sale-number"
+          >
             {`Pedido ${saleId}`}
           </span>
           <span
             data-testid="order-status"
-            className={ ` - sale-${saleStatus}` }
+            className={ `sale-${saleStatus}` }
           >
             {saleStatus}
           </span>
@@ -50,29 +55,23 @@ const AdminOrdersDetail = ({ id }) => {
                   {`${productName} - `}
                 </span>
                 <span data-testid={ `${index}-product-total-value` }>
-                  {`R$ ${(unitPrice * quantity).toLocaleString('pt-BR', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}`}
+                  {`R$ ${realFormat(unitPrice * quantity)}`}
                 </span>
                 <span
                   className="product-unit-price"
                   data-testid={ `${index}-order-unit-price` }
                 >
-                  {`(R$ ${(unitPrice).toLocaleString('pt-BR', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })})`}
+                  {`(R$ ${realFormat(unitPrice)}`}
                   )
                 </span>
               </li>
             ))}
           </ul>
-          <h2 data-testid="order-total-value">
-            {`Total: R$ ${total.toLocaleString('pt-BR', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}`}
+          <h2
+            data-testid="order-total-value"
+            className="sale-total"
+          >
+            {`Total: R$ ${realFormat(total)}`}
           </h2>
         </div>
         <button
@@ -86,10 +85,6 @@ const AdminOrdersDetail = ({ id }) => {
       </div>
     </div>
   );
-};
-
-AdminOrdersDetail.propTypes = {
-  id: PropTypes.number.isRequired,
 };
 
 export default AdminOrdersDetail;

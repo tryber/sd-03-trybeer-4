@@ -1,6 +1,11 @@
 const jwt = require('jsonwebtoken');
-const Services = require('../services/saleService');
-const { getAllSales, getSaleInfo, finishSale } = require('../services/saleService');
+const {
+  insertSale,
+  getAllSales,
+  getSaleInfo,
+  getSalesByUser,
+  endSale,
+} = require('../services/saleService');
 
 const createSale = async (req, res) => {
   const data = req.body;
@@ -8,7 +13,7 @@ const createSale = async (req, res) => {
   const { cart, user, justNumberPrice } = req.body;
   const { id } = user;
 
-  const sale = await Services.createSale(id, nameAdress, numberAdress, justNumberPrice, cart);
+  const sale = await insertSale(id, nameAdress, numberAdress, justNumberPrice, cart);
 
   return res.status(200).json(sale);
 };
@@ -17,7 +22,7 @@ const getSales = async (req, res) => {
   const { authorization } = req.headers;
   const JWT_SECRET = 'tentecerveja';
   const { id } = jwt.verify(authorization, JWT_SECRET);
-  const sales = await Services.getSalesByUser(id);
+  const sales = await getSalesByUser(id);
   return res.status(200).json(sales);
 };
 
@@ -42,7 +47,7 @@ const setAsDelivered = async (req, res) => {
     case saleInfo.status === 'Entregue':
       return res.status(304).json({ message: 'Order was already delivered' });
     case saleInfo.status === 'Pendente':
-      return finishSale(id).then(() => res.status(200));
+      return endSale(id).then(() => res.status(200));
     default:
       return res.status(400).json({ message: 'Sorry. Try again!' });
   }
